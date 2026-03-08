@@ -1,0 +1,77 @@
+@if (question(); as q) {
+  <div class="quiz-container">
+
+    <!-- Définition -->
+    <p class="word"><strong>{{ q.definition }} ({{q.difficulty}})</strong></p>
+
+    <!-- Champ texte -->
+    <div class="text-answer input-container">
+      <input
+        #answerInput
+        type="text"
+        [value]="userAnswer() ?? ''"
+        placeholder="Your answer..."
+        (input)="userAnswer.set($any($event.target).value)"
+        (keyup.enter)="validateTypedAnswer()"
+      />
+
+      <button type="button" (click)="validateTypedAnswer()">
+        Validate
+      </button>
+    </div>
+
+    <!-- Hint -->
+    <div class="example">
+      @if (!showHint()) {
+        <button type="button" (click)="showHint.set(true)">
+          Hint
+        </button>
+      }
+    </div>
+
+    <!-- Choix multiples (affichés uniquement après clic sur Hint) -->
+    @if (showHint()) {
+      <div class="choices">
+        @for (choice of q.choices; track choice) {
+          <button
+            type="button"
+            (click)="selectAnswer(choice)"
+            [class.selected]="selectedAnswer() === choice"
+            [class.correct]="
+              (selectedAnswer() === choice && isCorrect()) ||
+              (correctAnswerToShow() === choice)
+            "
+            [class.incorrect]="selectedAnswer() === choice && isCorrect() === false"
+          >
+            {{ choice }}
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Feedback après réponse -->
+<p class="feedback" [class.correct]="isCorrect()" [class.incorrect]="isCorrect() === false">
+  @if (isCorrect() != null) {
+    @if (!isCorrect()) {
+      The correct answer is "{{ correctAnswerToShow() }}".
+    } @else {
+      Correct!
+    }
+  }
+</p>
+    
+
+    <!-- Barre de progression -->
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="progress()"></div>
+    </div>
+
+  </div>
+}
+@else {
+  <!-- Fin du quiz -->
+  <div class="quiz-end">
+    <p>Quiz finished ! Score : {{ score() }} / {{ totalQuestions }}</p>
+    <button type="button" (click)="restartQuiz()">Again !</button>
+  </div>
+}
