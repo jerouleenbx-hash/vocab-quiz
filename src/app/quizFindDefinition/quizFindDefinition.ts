@@ -1,6 +1,7 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { QuizService, MultipleChoiceWord } from '../services/quiz.service';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
@@ -14,25 +15,30 @@ export class QuizFindDefinition implements OnInit {
   selectedAnswer = signal<string | null>(null);
   score = signal(0);
   showHint = signal(false);
-  // signal pour stocker la bonne réponse à afficher si la réponse est incorrecte
-correctAnswerToShow = signal<string | null>(null);
-
+  correctAnswerToShow = signal<string | null>(null);
+  
   totalQuestions = 10;
   currentIndex = 0;
+  difficulty: string | null=null;
 
-  constructor(private quizService: QuizService) {}
+  constructor(private quizService: QuizService, private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.loadNextQuestion();
-  }
+  ngOnInit() {    
 
-  loadNextQuestion() {
+    this.route.paramMap.subscribe(params => {
+        this.difficulty = params.get('difficulty');
+        console.log("Nouvelle difficulté :", this.difficulty);  
+        this.restartQuiz();
+    })
+ }  
+
+  loadNextQuestionLevel(level: string | null) {
     if (this.currentIndex >= this.totalQuestions) {
       this.question.set(null); // quiz terminé
       return;
     }
 
-    this.quizService.getNextQuestionFindDefinition().subscribe({
+    this.quizService.getNextQuestionFindDefinition(level).subscribe({
       next: (q) => { 
         this.question.set(q);          // la bonne réponse est fournie par le back
         this.selectedAnswer.set(null);
@@ -64,7 +70,7 @@ correctAnswerToShow = signal<string | null>(null);
     const delay = correct ? 1000 : 2000;
 
     setTimeout(() => {
-      this.loadNextQuestion();
+      this.loadNextQuestionLevel(this.difficulty);
     }, delay);
   }
 
@@ -80,8 +86,9 @@ correctAnswerToShow = signal<string | null>(null);
   }
 
   restartQuiz() {
+    console.log('RESTART');
     this.score.set(0);
     this.currentIndex = 0;
-    this.loadNextQuestion();
+    this.loadNextQuestionLevel(this.difficulty);
   }
 }

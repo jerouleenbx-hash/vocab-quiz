@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ApplicationConfig, Component, NgModule } from '@angular/core';
+import { provideRouter, RouterOutlet, withRouterConfig } from '@angular/router';
 import { Header } from "./header/header";
+import { routes } from './app.routes';
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, Header],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -10,3 +12,13 @@ import { Header } from "./header/header";
 export class App {
   title = 'quiz';
 }
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(
+      routes,
+      withRouterConfig({
+        onSameUrlNavigation: 'reload'
+      })
+    )
+  ]
+};

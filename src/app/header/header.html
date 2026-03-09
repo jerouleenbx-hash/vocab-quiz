@@ -2,10 +2,31 @@
   <nav>
     <div class="menu-container">
       <div class="menu-title">Vocabulary</div>
-      <ul class="nav-menu">
-          <li><a mat-button routerLink="quizFindDefinition">Find Definition</a></li>
-          <li><a mat-button routerLink="quizFindWord">Find Word</a></li>
-      </ul>
+
+      <div class="menu-section def-section">
+        <ul class="nav-menu">
+         @for (level of levels; track level) {
+  <li>
+    <a mat-button (click)="goToDefLevel(level)" [ngStyle]="{'background-color': defButtonColors[levels.indexOf(level)]}">
+      Déf {{ level }}
+    </a>
+  </li>
+}
+        </ul>
+      </div>
+
+      <div class="menu-section word-section">
+        <ul class="nav-menu">
+@for (level of levels; track level) {
+  <li>
+    <a mat-button (click)="goToWordLevel(level)" [ngStyle]="{'background-color': wordButtonColors[levels.indexOf(level)]}">
+      Word {{ level }}
+    </a>
+  </li>
+}
+        </ul>
+      </div>
+
     </div>
   </nav>
 </header>

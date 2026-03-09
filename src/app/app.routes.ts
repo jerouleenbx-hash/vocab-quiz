@@ -4,7 +4,7 @@ import { QuizFindWord } from './quizFindWord/quizFindWord';
 import { Header } from './header/header';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'QuizFindDefinition', pathMatch: 'full' },
-  { path: 'quizFindDefinition', component: QuizFindDefinition },
-  { path: 'quizFindWord', component: QuizFindWord }
+  { path: '', redirectTo: 'QuizFindDefinition/A1', pathMatch: 'full' },
+  { path: 'quizFindDefinition/:difficulty', component: QuizFindDefinition },
+  { path: 'quizFindWord/:difficulty', component: QuizFindWord }
 ];
