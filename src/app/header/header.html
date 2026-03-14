@@ -1,29 +1,67 @@
 <header>
   <nav>
     <div class="menu-container">
+
       <div class="menu-title">Vocabulary</div>
+
+      <!-- menu déroulant tags -->
+      <div class="menu-section tag-section">
+        <label for="tag-select">Tag</label>
+        <select id="tag-select" (change)="onTagChangeFromEvent($event)" [value]="selectedTag">
+          <option value="" disabled selected>Select a tag</option>
+          <option *ngFor="let tag of tags$ | async" [value]="tag">{{ tag }}</option>
+        </select>
+      </div>
+
 
       <div class="menu-section def-section">
         <ul class="nav-menu">
-         @for (level of levels; track level) {
-  <li>
-    <a mat-button (click)="goToDefLevel(level)" [ngStyle]="{'background-color': defButtonColors[levels.indexOf(level)]}">
-      Déf {{ level }}
-    </a>
-  </li>
-}
+          <li>
+            <a mat-button (click)="goToList()"             
+            [ngStyle]="{'background-color': wordButtonColors[1]}"
+            [class.active-action]="selectedAction === 'list'">
+               List
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-section def-section">
+        <ul class="nav-menu">
+          <li>
+            <a mat-button (click)="goToQuizDefinition()"
+             
+            [ngStyle]="{'background-color': wordButtonColors[1]}"
+            [class.active-action]="selectedAction === 'quizDef'">
+               Quizz Definition
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-section def-section">
+        <ul class="nav-menu">
+          <li>
+            <a mat-button (click)="goToQuizWord()"
+             
+            [ngStyle]="{'background-color': wordButtonColors[1]}"
+            [class.active-action]="selectedAction === 'quizWord'">
+               Quizz Word
+            </a>
+          </li>
         </ul>
       </div>
 
       <div class="menu-section word-section">
         <ul class="nav-menu">
-@for (level of levels; track level) {
-  <li>
-    <a mat-button (click)="goToWordLevel(level)" [ngStyle]="{'background-color': wordButtonColors[levels.indexOf(level)]}">
-      Word {{ level }}
-    </a>
-  </li>
-}
+        <li *ngFor="let level of levels; let i = index">
+          <a mat-button
+            (click)="changeLevel(level)"
+            [ngStyle]="{'background-color': wordButtonColors[i]}"
+            [class.active-level]="selectedLevel === level">
+            {{ level }}
+          </a>
+        </li>
         </ul>
       </div>
 

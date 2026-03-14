@@ -1,36 +1,84 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+
+import { WordService } from '../services/word.service';
+import { GlobalService } from '../services/global.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule, RouterLink, MatButtonModule],
   templateUrl: './header.html',
-  styleUrl: './header.scss',
+  styleUrls: ['./header.scss'],
 })
-export class Header {
-  levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+export class Header implements OnInit {
+  levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'All'];
 
-  // couleurs du vert clair au vert foncé pour Déf
-  defButtonColors = ['#a8e6cf', '#81d4a7', '#5fcf80', '#3fbf60', '#2e9e4d', '#1e7c3b'];
+  wordButtonColors = ['#a3d8f4', '#7cc1ea', '#56a9e0', '#3392d5', '#1c78bf', '#105ea5', '#0a4680'];
 
-  // couleurs du bleu clair au bleu foncé pour Word
-  wordButtonColors = ['#a3d8f4', '#7cc1ea', '#56a9e0', '#3392d5', '#1c78bf', '#105ea5'];
+  tags$!: Observable<string[]>;     
+  selectedTag: string = "Basic words";
+  selectedLevel: string = "All"; // par défaut, ou le premier level
+  selectedAction: 'list' | 'quizDef' | 'quizWord' = 'list'; // action sélectionnée par défaut
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private wordService: WordService,
+    private globalService: GlobalService
+  ) {}
+
+  ngOnInit() {
+    this.tags$ = this.wordService.getAllTags();
+     // définir le tag par défaut dans le service
+    this.globalService.setTag(this.selectedTag);
+  }
 
   goToDefLevel(level: string) {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/quizFindDefinition', level]);
-    });
+    // navigation programmatique
   }
-
 
   goToWordLevel(level: string) {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/quizFindWord', level]);
+    // navigation programmatique
+  }
+
+  goToQuizDefinition() {
+      this.selectedAction = 'quizDef';
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/quizFindDefinition']);
     });
   }
+
+  goToQuizWord() {
+      this.selectedAction = 'quizWord';
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/quizFindWord']);
+    });
+  }
+
+  goToList() {
+      this.selectedAction = 'list';
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/listWord']);
+    });
+  }
+  
+
+  changeLevel(level: string) {
+    this.globalService.setLevel(level);
+    this.selectedLevel = level;       // mémoriser le level choisi
+  }
+
+  onTagChangeFromEvent(event: Event) {
+  const select = event.target as HTMLSelectElement | null;
+  if (select?.value) {
+    this.globalService.setTag(select.value);
+    this.selectedTag = select.value;
+  }
+  console.log("New tag : " + this.selectedTag);
+}
+
+
 }

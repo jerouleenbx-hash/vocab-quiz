@@ -8,6 +8,7 @@ export interface MultipleChoiceWord {
   definition: string; // la vraie réponse fournie par le back
   difficulty: string;
   type: string;
+  tags?: string;
   example?: string;
   choices: string[];
 }
@@ -18,39 +19,42 @@ export class QuizService {
 
   constructor(private http: HttpClient) {}
 
-
-  getNextQuestionFindDefinition(level: string | null = null): Observable<MultipleChoiceWord> {
+getNextQuestionFindDefinition(level: string, tag: string | null): Observable<MultipleChoiceWord> {
   return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
     map((allWords: MultipleChoiceWord[]) => {
-      // 1. Filtre par difficulté si un niveau est spécifié
-      const filteredWords = level ? allWords.filter(w => w.difficulty === level) : allWords;
+      
 
-      console.log(filteredWords);
-      // 2. Si aucun mot ne correspond, vous pouvez gérer ce cas ici (par exemple, retourner un mot par défaut ou un message)
+      // 1. Filtrer par difficulté si un niveau est spécifié
+      const filteredWords = level !== "All" ? allWords.filter(w => w.difficulty === level) : allWords;
+
       if (filteredWords.length === 0) {
         throw new Error("Aucun mot ne correspond à la difficulté choisie.");
       }
 
-      // 3. Sélectionne un objet aléatoire parmi les mots filtrés
-      const randomIndex = Math.floor(Math.random() * filteredWords.length);
-      const selectedWord = filteredWords[randomIndex];
+      // 2. Sélectionner uniquement les mots qui contiennent le tag passé en paramètre
 
-      // 4. Filtre les objets du même type (sauf l'objet sélectionné)
+      const taggedWords = tag ? filteredWords.filter(w => w.tags?.includes(tag)) : filteredWords;
+      if (taggedWords.length === 0) {
+        throw new Error("Aucun mot avec le tag " + tag + " disponible.");
+      }
+
+      // 3. Sélectionner un mot aléatoire parmi les mots taggés
+      const randomIndex = Math.floor(Math.random() * taggedWords.length);
+      const selectedWord = taggedWords[randomIndex];
+
+      // 4. Pour les mauvaises réponses, on prend des mots du même type mais **sans filtrer sur le tag**
       const sameTypeWords = filteredWords.filter(
         (w) => w.type === selectedWord.type && w.id !== selectedWord.id
       );
 
-      console.log(sameTypeWords);
-
-      // 5. Sélectionne 3 autres définitions aléatoires du même type
       const shuffledSameType = sameTypeWords.sort(() => 0.5 - Math.random());
       const wrongChoices = shuffledSameType.slice(0, 3).map((w) => w.definition);
 
-      // 6. Construit le tableau de choix (correct + 3 incorrects)
+      // 5. Construire le tableau de choix (correct + 3 incorrects)
       const allChoices = [...wrongChoices, selectedWord.definition];
       const shuffledChoices = allChoices.sort(() => 0.5 - Math.random());
 
-      // 7. Retourne l'objet MultipleChoiceWord
+      // 6. Retourner l'objet MultipleChoiceWord
       return {
         id: selectedWord.id,
         word: selectedWord.word,
@@ -58,35 +62,40 @@ export class QuizService {
         definition: selectedWord.definition,
         example: selectedWord.example,
         type: selectedWord.type,
+        tags: selectedWord.tags,
         difficulty: selectedWord.difficulty
       };
     })
   );
 }
 
-getNextQuestionFindWord(level: string | null = null): Observable<MultipleChoiceWord> {
+getNextQuestionFindWord(level: string, tag: string): Observable<MultipleChoiceWord> {
   return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
     map((allWords: MultipleChoiceWord[]) => {
 
       console.log('Difficulty : ' + level);
       // 1. Filtre par difficulté si un niveau est spécifié
-      const filteredWords = level ? allWords.filter(w => w.difficulty === level) : allWords;
+      const filteredWords = level !== "All" ? allWords.filter(w => w.difficulty === level) : allWords;
 
       // 2. Si aucun mot ne correspond, gérer ce cas
       if (filteredWords.length === 0) {
         throw new Error("Aucun mot ne correspond à la difficulté choisie.");
       }
 
+      // 2. Sélectionner uniquement les mots qui contiennent le tag 'OfficeS9E18'
+      const taggedWords = tag ? filteredWords.filter(w => w.tags?.includes(tag)) : filteredWords;
+      if (taggedWords.length === 0) {
+        throw new Error("Aucun mot avec le tag 'OfficeS9E18' disponible.");
+      }
+      
       // 3. Sélectionne un objet aléatoire parmi les mots filtrés
-      const randomIndex = Math.floor(Math.random() * filteredWords.length);
-      const selectedWord = filteredWords[randomIndex];
+      const randomIndex = Math.floor(Math.random() * taggedWords.length);
+      const selectedWord = taggedWords[randomIndex];
 
       // 4. Filtre les objets du même type (sauf l'objet sélectionné)
-      const sameTypeWords = filteredWords.filter(
+      const sameTypeWords = taggedWords.filter(
         (w) => w.type === selectedWord.type && w.id !== selectedWord.id
       );
-
-      console.log(sameTypeWords);
 
       // 5. Sélectionne 3 autres mots aléatoires du même type
       const shuffledSameType = sameTypeWords.sort(() => 0.5 - Math.random());

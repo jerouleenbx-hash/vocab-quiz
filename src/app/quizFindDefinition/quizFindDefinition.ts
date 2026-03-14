@@ -2,6 +2,7 @@ import { Component, signal, OnInit } from '@angular/core';
 import { QuizService, MultipleChoiceWord } from '../services/quiz.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from '../services/global.service';
 
 @Component({
   selector: 'app-quiz',
@@ -19,26 +20,24 @@ export class QuizFindDefinition implements OnInit {
   
   totalQuestions = 10;
   currentIndex = 0;
-  difficulty: string | null=null;
+  difficulty: string = 'A1';
+  tag: string = "Basic words";
 
-  constructor(private quizService: QuizService, private route: ActivatedRoute) {}
+  constructor(private quizService: QuizService, private globalService: GlobalService, private route: ActivatedRoute) {}
 
   ngOnInit() {    
-
-    this.route.paramMap.subscribe(params => {
-        this.difficulty = params.get('difficulty');
-        console.log("Nouvelle difficulté :", this.difficulty);  
+        this.difficulty = this.globalService.currentLevel;
+        this.tag = this.globalService.currentTag;
         this.restartQuiz();
-    })
  }  
 
-  loadNextQuestionLevel(level: string | null) {
+  loadNextQuestionLevel(level: string) {
     if (this.currentIndex >= this.totalQuestions) {
       this.question.set(null); // quiz terminé
       return;
     }
 
-    this.quizService.getNextQuestionFindDefinition(level).subscribe({
+    this.quizService.getNextQuestionFindDefinition(this.difficulty, this.tag).subscribe({
       next: (q) => { 
         this.question.set(q);          // la bonne réponse est fournie par le back
         this.selectedAnswer.set(null);

@@ -48,3 +48,16 @@
 .word-section {
   margin-left: auto; /* pousse le bloc Word à droite */
 }
+
+.active-level {
+  border: 2px solid gold;      // bord doré
+  border-radius: 6px;           // arrondi
+  box-shadow: 0 0 5px gold;     // petit effet lumineux
+}
+
+.active-action {
+  border: 2px solid gold;
+  border-radius: 6px;
+  box-shadow: 0 0 5px gold;
+  font-weight: bold;
+}

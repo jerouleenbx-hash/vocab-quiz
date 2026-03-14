@@ -1,0 +1,70 @@
+.word-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 10px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.word-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  background-color: #c5c9e9;
+  cursor: pointer;
+
+  width: 260px;       // fixed width
+  height: 180px;      // fixed height
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  }
+}
+
+.word-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.word-body {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 6px;
+  overflow-y: auto;   // scroll if content is too long
+  flex-grow: 1;       // fills remaining height
+}
+
+.definition {
+  margin: 4px 0;
+}
+
+.example {
+  margin-top: 4px;
+  font-style: italic;
+  color: #555;
+}
+
+.word-body {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.word-card.revealed .word-body {
+  opacity: 1;
+}
