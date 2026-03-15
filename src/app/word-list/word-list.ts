@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, of, combineLatest } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of, combineLatest, BehaviorSubject } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 import { WordService } from '../services/word.service';
 import { GlobalService } from '../services/global.service';
 import { MultipleChoiceWord } from '../models/multipleChoiceWord';
@@ -15,20 +15,55 @@ import { MultipleChoiceWord } from '../models/multipleChoiceWord';
 })
 export class WordListComponent {
 
+  private pageSubject = new BehaviorSubject<number>(1);
+  page$ = this.pageSubject.asObservable();
+
+  pageSize = 15;
+
   words$: Observable<MultipleChoiceWord[]>;
+  totalPages$: Observable<number>;
+
   revealed = new Set<number>();
 
   constructor(
     private wordService: WordService,
     private globalService: GlobalService
   ) {
-    // combine tag et level pour filtrer les mots
-    this.words$ = combineLatest([this.globalService.tag$, this.globalService.level$]).pipe(
+
+    const allWords$ = combineLatest([
+      this.globalService.tag$,
+      this.globalService.level$
+    ]).pipe(
       switchMap(([tag, level]) => {
-        if (!tag) return of([]);  // pas de tag sélectionné
+        if (!tag) return of([]);
         return this.wordService.listWords(level, tag);
       })
     );
+
+    this.totalPages$ = allWords$.pipe(
+      map(words => Math.ceil(words.length / this.pageSize))
+    );
+
+    this.words$ = combineLatest([allWords$, this.page$]).pipe(
+      map(([words, page]) => {
+        const start = (page - 1) * this.pageSize;
+        return words.slice(start, start + this.pageSize);
+      })
+    );
+  }
+
+  nextPage(totalPages: number) {
+    const current = this.pageSubject.value;
+    if (current < totalPages) {
+      this.pageSubject.next(current + 1);
+    }
+  }
+
+  prevPage() {
+    const current = this.pageSubject.value;
+    if (current > 1) {
+      this.pageSubject.next(current - 1);
+    }
   }
 
   toggleReveal(word: MultipleChoiceWord) {

@@ -29,3 +29,13 @@
   }
 
 </div>
+
+<div class="pagination" *ngIf="totalPages$ | async as totalPages">
+
+  <button (click)="prevPage()">⬅ Previous</button>
+
+  <span>Page {{ page$ | async }} / {{ totalPages }}</span>
+
+  <button (click)="nextPage(totalPages)">Next ➡</button>
+
+</div>
