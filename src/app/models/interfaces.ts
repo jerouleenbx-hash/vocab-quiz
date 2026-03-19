@@ -9,3 +9,13 @@ export interface MultipleChoiceWord {
   example?: string;
   choices: string[];
 }
+
+export interface SimpleWord {
+  id: number;
+  word: string;
+  definition: string;
+  difficulty: string;
+  type: string;
+  tags?: string;
+  example?: string;
+}

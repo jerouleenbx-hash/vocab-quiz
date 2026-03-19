@@ -4,7 +4,7 @@ import { Observable, of, combineLatest, BehaviorSubject } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { WordService } from '../services/word.service';
 import { GlobalService } from '../services/global.service';
-import { MultipleChoiceWord } from '../models/multipleChoiceWord';
+import { SimpleWord } from '../models/interfaces';
 
 @Component({
   selector: 'app-word-list',
@@ -20,7 +20,7 @@ export class WordListComponent {
 
   pageSize = 15;
 
-  words$: Observable<MultipleChoiceWord[]>;
+  words$: Observable<SimpleWord[]>;
   totalPages$: Observable<number>;
 
   revealed = new Set<number>();
@@ -36,7 +36,7 @@ export class WordListComponent {
     ]).pipe(
       switchMap(([tag, level]) => {
         if (!tag) return of([]);
-        return this.wordService.listWords(level, tag);
+        return this.wordService.getAllWords(level, tag);
       })
     );
 
@@ -66,12 +66,12 @@ export class WordListComponent {
     }
   }
 
-  toggleReveal(word: MultipleChoiceWord) {
+  toggleReveal(word: SimpleWord) {
     if (this.revealed.has(word.id)) this.revealed.delete(word.id);
     else this.revealed.add(word.id);
   }
 
-  isRevealed(word: MultipleChoiceWord) {
+  isRevealed(word: SimpleWord) {
     return this.revealed.has(word.id);
   }
 }

@@ -1,4 +1,4 @@
-@if (question(); as q) {
+@if (currentQuestion(); as q) {
 
   <div class="quiz-container">
     <!-- Mot à deviner -->
@@ -51,7 +51,7 @@
 }
 @else {
     <!-- Fin du quiz -->
-     <div class="quiz-end">
+      <div class="quiz-end">
         <p>Quiz finished ! Score : {{ score() }} / {{ totalQuestions }}</p>
         <button type="button" (click)="restartQuiz()">Again !</button>
       </div>

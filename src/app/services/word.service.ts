@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-export interface MultipleChoiceWord {
+
+export interface SimpleWord {
   id: number;
   word: string;
   definition: string;
@@ -10,7 +11,18 @@ export interface MultipleChoiceWord {
   type: string;
   tags?: string;
   example?: string;
+}
+
+export interface MultipleChoiceWord extends SimpleWord {
   choices: string[];
+}
+
+export interface WordProgress {
+  id: number;
+  userid: number;
+  word: string;
+  date: string;
+  correct: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -36,6 +48,29 @@ console.log(tag);
           )
       )
     );
+  }
+
+
+getAllWords(level: string, tag: string): Observable<SimpleWord[]> {
+  return this.http.get<SimpleWord[]>(`${this.apiUrl}/words`, {
+    params: {
+      tag: tag,
+      level: level
+    }
+  });
+}
+
+
+listProgress(level: string, tag: string): Observable<WordProgress[]> {
+console.log(level);
+console.log(tag);
+    const difficultyOrder = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+
+    return this.http.get<WordProgress[]>(`${this.apiUrl}/words/progress`).pipe(
+      map((allWords: WordProgress[]) =>
+        allWords
+          )
+      );
   }
 
 getAllTags(): Observable<string[]> {
