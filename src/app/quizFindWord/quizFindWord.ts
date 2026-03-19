@@ -12,7 +12,8 @@ import { GlobalService } from '../services/global.service';
   styleUrls: ['./quizFindWord.scss']
 })
 export class QuizFindWord implements OnInit {
-  question = signal<MultipleChoiceWord | null>(null);
+  questions = signal<MultipleChoiceWord[]>([]);
+  currentQuestion = signal<MultipleChoiceWord | null>(null);
   selectedAnswer = signal<string | null>(null);
   userAnswer = signal<string | null>(null);
   score = signal(0);
@@ -20,45 +21,53 @@ export class QuizFindWord implements OnInit {
   correctAnswerToShow = signal<string | null>(null);
   feedbackMessage = signal<string | null>(null);
 
-  totalQuestions = 10;
-  currentIndex = 0;
+  totalQuestions = 5;
+  currentIndex = signal<number>(0);
   difficulty: string = 'A1';
   tag: string = "Basic words";
+  userId: number = 1; // À adapter selon ton système d'authentification
 
   @ViewChild('answerInput') answerInputRef!: ElementRef<HTMLInputElement>;
 
   constructor(private quizService: QuizService, private globalService: GlobalService, private route: ActivatedRoute) {}
 
-  ngOnInit() {    
+  ngOnInit() {
         this.difficulty = this.globalService.currentLevel;
         this.tag = this.globalService.currentTag;
         this.restartQuiz();
- }  
+  }  
 
   ngAfterViewInit() {
     this.focusInput();
   }
 
-  loadNextQuestionLevel(level: string) {
-    if (this.currentIndex >= this.totalQuestions) {
-      this.question.set(null); // quiz terminé
-      return;
-    }
 
-    this.quizService.getNextQuestionFindWord(this.difficulty, this.tag).subscribe({
-      next: (q) => { 
-        this.question.set(q);          // la bonne réponse est fournie par le back
-        this.selectedAnswer.set(null);
-        this.showHint.set(false); // réinitialiser l’indice
-        this.currentIndex++;
-        console.log(q);
+  loadQuestions() {
+    this.quizService.getQuizWord(this.difficulty, this.tag, this.userId).subscribe({
+      next: (qs) => {
+        this.questions.set(qs);
+        this.currentIndex.set(0);
+        this.loadCurrentQuestion();
       },
       error: (err) => console.error('Erreur API:', err),
     });
   }
 
+  loadCurrentQuestion() {
+    
+    if (this.currentIndex() >= this.totalQuestions) {
+      this.currentQuestion.set(null); // quiz terminé
+      return;
+    }
+
+    this.currentQuestion.set(this.questions()[this.currentIndex()]);
+    this.selectedAnswer.set(null);
+    this.showHint.set(false);
+    this.correctAnswerToShow.set(null);
+  }
+
   selectAnswer(choice: string) {
-    const q = this.question();
+    const q = this.currentQuestion();
     if (!q) return;
 
     const correct = choice === q.word;
@@ -77,7 +86,8 @@ export class QuizFindWord implements OnInit {
     const delay = correct ? 1000 : 2000;
 
     setTimeout(() => {
-      this.loadNextQuestionLevel(this.difficulty);
+      this.currentIndex.set(this.currentIndex()+1);
+      this.loadCurrentQuestion();
     }, delay);
   }
 
@@ -86,7 +96,7 @@ export class QuizFindWord implements OnInit {
 
     const choice = (this.userAnswer() || '').trim().toLowerCase();
 
-    const q = this.question();
+    const q = this.currentQuestion();
     if (!q) return;
 
     const correct = choice === q.word;
@@ -107,31 +117,32 @@ export class QuizFindWord implements OnInit {
     this.userAnswer.set(null);
       // focus automatique
       setTimeout(() => this.focusInput(), 0);
-    setTimeout(() => {
-      this.loadNextQuestionLevel(this.difficulty);
+
+      setTimeout(() => {
+      this.currentIndex.set(this.currentIndex()+1);
+      this.loadCurrentQuestion();
     }, delay);
 
   }
 
-   focusInput() {
+  focusInput() {
     this.answerInputRef?.nativeElement?.focus();
   }
 
   isCorrect(): boolean | null {
     const answer = this.selectedAnswer();
-    const q = this.question();
+    const q = this.currentQuestion();
     if (!answer || !q) return null;
     return answer === q.word;
   }
 
   progress(): number {
-    return Math.round(((this.currentIndex-1) / this.totalQuestions) * 100);
+    return Math.round(((this.currentIndex()-1) / this.totalQuestions) * 100);
   }
 
   restartQuiz() {
     this.score.set(0);
-    this.currentIndex = 0;
-    this.loadNextQuestionLevel(this.difficulty);
+    this.loadQuestions();
   }
 
 }

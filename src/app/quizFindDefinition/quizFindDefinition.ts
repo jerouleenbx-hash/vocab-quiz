@@ -38,7 +38,7 @@ export class QuizFindDefinition implements OnInit {
   }
 
   loadQuestions() {
-    this.quizService.getFilteredWords(this.difficulty, this.tag, this.userId).subscribe({
+    this.quizService.getQuizDefinition(this.difficulty, this.tag, this.userId).subscribe({
       next: (qs) => {
         this.questions.set(qs);
         this.currentIndex.set(0);
