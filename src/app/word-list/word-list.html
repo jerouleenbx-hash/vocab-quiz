@@ -6,6 +6,7 @@
 
       <div class="word-header">
         <span class="word-title">{{ word.word }} ({{word.difficulty}})</span>
+        <div class="score-dot" [ngStyle]="{'background-color': getScoreColor(word)}"></div>
       </div>
 
       @if (isRevealed(word)) {
@@ -15,11 +16,15 @@
             <strong>Definition:</strong> {{ word.definition }}
           </p>
 
-          @if (word.example) {
+          @if (word.example_sentence) {
             <p class="example">
-              <strong>Example:</strong> {{ word.example }}
+              <strong>Example:</strong> {{ word.example_sentence }}
             </p>
           }
+
+          <p class="example">
+            <strong>Score:</strong> {{ word.score }}
+          </p>
 
         </div>
       }

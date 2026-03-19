@@ -92,3 +92,17 @@
     }
   }
 }
+
+.word-header {
+  position: relative; /* pour que le score-dot soit positionné par rapport au header */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 8px;
+}

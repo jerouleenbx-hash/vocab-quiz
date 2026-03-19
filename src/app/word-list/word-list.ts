@@ -71,7 +71,20 @@ export class WordListComponent {
     else this.revealed.add(word.id);
   }
 
-  isRevealed(word: SimpleWord) {
+  isRevealed(word: SimpleWord) {    
     return this.revealed.has(word.id);
   }
+
+  getScoreColor(word: SimpleWord): string {
+  // Clamp le score entre 0 et 1
+  const score = word.score ?? 0;
+  const s = Math.min(Math.max(score, 0), 1);
+
+  // De rouge (255,0,0) à vert (0,200,0)
+  const r = Math.round(255 * (1 - s));
+  const g = Math.round(200 * s);
+  const b = 0;
+
+  return `rgb(${r},${g},${b})`;
+}
 }

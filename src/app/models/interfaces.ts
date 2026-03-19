@@ -16,6 +16,7 @@ export interface SimpleWord {
   definition: string;
   difficulty: string;
   type: string;
+  score?: number;
   tags?: string;
-  example?: string;
+  example_sentence?: string;
 }

@@ -9,6 +9,7 @@ export interface SimpleWord {
   definition: string;
   difficulty: string;
   type: string;
+  score?: number;
   tags?: string;
   example?: string;
 }
@@ -32,25 +33,6 @@ export class WordService {
 
   constructor(private http: HttpClient) {}
 
-  listWords(level: string, tag: string): Observable<MultipleChoiceWord[]> {
-console.log(level);
-console.log(tag);
-    const difficultyOrder = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-
-    return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
-      map((allWords: MultipleChoiceWord[]) =>
-        allWords
-          .filter(w => w.tags?.includes(tag))
-          .filter(w => w.difficulty === level || level ==='All')
-          .sort((a, b) =>
-            difficultyOrder.indexOf(a.difficulty) -
-            difficultyOrder.indexOf(b.difficulty)
-          )
-      )
-    );
-  }
-
-
 getAllWords(level: string, tag: string): Observable<SimpleWord[]> {
   return this.http.get<SimpleWord[]>(`${this.apiUrl}/words`, {
     params: {
@@ -60,18 +42,6 @@ getAllWords(level: string, tag: string): Observable<SimpleWord[]> {
   });
 }
 
-
-listProgress(level: string, tag: string): Observable<WordProgress[]> {
-console.log(level);
-console.log(tag);
-    const difficultyOrder = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-
-    return this.http.get<WordProgress[]>(`${this.apiUrl}/words/progress`).pipe(
-      map((allWords: WordProgress[]) =>
-        allWords
-          )
-      );
-  }
 
 getAllTags(): Observable<string[]> {
   return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
