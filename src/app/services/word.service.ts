@@ -59,4 +59,9 @@ getAllTags(): Observable<string[]> {
   );
 }
 
+importWords(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/import`, formData);
+}
 }
