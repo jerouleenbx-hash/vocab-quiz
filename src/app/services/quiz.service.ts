@@ -1,17 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { forkJoin, map, Observable } from 'rxjs';
-
-export interface MultipleChoiceWord {
-  id: number;
-  word: string;
-  definition: string; // la vraie réponse fournie par le back
-  difficulty: string;
-  type: string;
-  tags?: string;
-  example?: string;
-  choices: string[];
-}
+import { SimpleWord, MultipleChoiceWord } from '../models/interfaces'
 
 export interface WordProgress {
   id: number;
@@ -50,3 +40,6 @@ export class QuizService {
   }  
 
 }
+
+// Export MultipleChoiceWord so it can be imported from this file
+export type { MultipleChoiceWord };

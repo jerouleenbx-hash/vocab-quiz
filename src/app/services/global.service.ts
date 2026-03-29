@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class GlobalService {
 
   private _tag$ = new BehaviorSubject<string>('Basic words');
+  private _category$ = new BehaviorSubject<string>('BASIC WORDS');
   private _level$ = new BehaviorSubject<string>('A1');
 
   // ✅ Getter pour récupérer l'observable
@@ -22,10 +23,21 @@ export class GlobalService {
     this._tag$.next(tag);
   }
 
+   // ✅ Setter pour changer la category
+  setCategory(category: string) {
+    this._category$.next(category);
+  }
+
   // ✅ Setter pour changer le level
   setLevel(level: string) {
     this._level$.next(level);
   }
+
+  // Optionnel : récupérer directement la valeur actuelle
+  get currentCategory(): string {
+    return this._category$.getValue();
+  }
+
 
   // Optionnel : récupérer directement la valeur actuelle
   get currentTag(): string {

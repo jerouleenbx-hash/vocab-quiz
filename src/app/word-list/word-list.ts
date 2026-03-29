@@ -30,6 +30,7 @@ export class WordListComponent {
     private globalService: GlobalService
   ) {
 
+    console.log('TOTO : %', this.globalService.tag$);
     const allWords$ = combineLatest([
       this.globalService.tag$,
       this.globalService.level$

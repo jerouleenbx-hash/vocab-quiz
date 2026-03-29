@@ -1,22 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { SimpleWord, MultipleChoiceWord } from '../models/interfaces'
 
-
-export interface SimpleWord {
-  id: number;
-  word: string;
-  definition: string;
-  difficulty: string;
-  type: string;
-  score?: number;
-  tags?: string;
-  example?: string;
-}
-
-export interface MultipleChoiceWord extends SimpleWord {
-  choices: string[];
-}
 
 export interface WordProgress {
   id: number;
@@ -42,19 +28,40 @@ getAllWords(level: string, tag: string): Observable<SimpleWord[]> {
   });
 }
 
-
-getAllTags(): Observable<string[]> {
+getAllTags(category?: string): Observable<string[]> {
   return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
     map(words => {
+      // Filtrer par catégorie si spécifiée
+      const filteredWords = category
+        ? words.filter(w => w.category === category)
+        : words;
+
       // Extraire tous les tags non vides
-      const tags = words
-        .map(w => w.tags)                   // récupérer tags
-        .filter(tag => tag && tag.trim())   // ignorer null, undefined ou chaîne vide
-        .flatMap(tag => tag ? tag.split(',') : [])        
-        .map(tag => tag.trim());            // enlever les espaces superflus
+      const tags = filteredWords
+        .map(w => w.tags)
+        .filter(tag => tag && tag.trim())
+        .flatMap(tag => tag ? tag.split(',') : [])
+        .map(tag => tag.trim());
 
       // Supprimer les doublons
       return Array.from(new Set(tags));
+    })
+  );
+}
+
+
+getAllCategories(): Observable<string[]> {
+  return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
+    map(words => {
+      // Extraire tous les categories non vides
+      const categories = words
+        .map(w => w.category)                   // récupérer tags
+        .filter(category => category && category.trim())   // ignorer null, undefined ou chaîne vide
+        .flatMap(category => category ? category.split(',') : [])        
+        .map(category => category.trim());            // enlever les espaces superflus
+
+      // Supprimer les doublons
+      return Array.from(new Set(categories));
     })
   );
 }

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <header>
   <nav>
     <div class="menu-container">
@@ -5,6 +7,21 @@
       <!-- Titre -->
       <div class="menu-title">
         Vocabulary
+      </div>
+
+      <!-- Select Category -->
+      <div class="menu-item">
+        <select
+          id="tag-select"
+          (change)="onCategoryChangeFromEvent($event)"
+          [value]="selectedCategory">
+
+          <option value="" disabled>Select a category</option>
+          <option *ngFor="let category of categories$ | async" [value]="category">
+            {{ category }}
+          </option>
+
+        </select>
       </div>
 
       <!-- Select Tag -->
@@ -67,8 +84,23 @@
 
   </a>
 
+  <!-- Bouton Load -->
+  <label class="upload-btn">
+    <i class="fas fa-upload"></i>
+    <input type="file" (change)="onFileSelected($event)" accept=".csv" />
+  </label>
+
+
+<!-- Popup -->
+<div class="popup" [class.show]="showPopup">
+  <div class="popup-content">
+    <p>{{ popupMessage }}</p>
+    <button (click)="closePopup()">OK</button>
+  </div>
+</div>
 </div>
 
     </div>
   </nav>
 </header>
+
