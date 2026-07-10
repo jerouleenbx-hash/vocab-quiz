@@ -110,7 +110,7 @@ export class QuizFindWord implements OnInit {
       this.correctAnswerToShow.set(q.word); // montrer la bonne réponse
     }
 
-    this.quizService.sendAnswer(q.id, correct ? 3 : -1).subscribe();
+    this.quizService.sendAnswer(q.id, correct ? 2 : -1).subscribe();
 
     const delay = correct ? 1000 : 3000;
 

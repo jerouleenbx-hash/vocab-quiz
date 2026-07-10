@@ -4,6 +4,17 @@
   <nav>
     <div class="menu-container">
 
+      <!-- Bouton SWITCH -->
+      <a
+        mat-button
+        class="menu-item"
+        (click)="switch()"
+        [ngStyle]="{'background-color': wordButtonColors[1]}"
+        [class.active-action]="selectedAction === 'list'">
+        Switch
+      </a>
+      
+
       <!-- Titre -->
       <div class="menu-title">
         Vocabulary
@@ -49,6 +60,17 @@
         List
       </a>
 
+
+      <!-- Bouton LIST TABLE-->
+      <a
+        mat-button
+        class="menu-item"
+        (click)="goToTable()"
+        [ngStyle]="{'background-color': wordButtonColors[1]}"
+        [class.active-action]="selectedAction === 'table'">
+        Table
+      </a>
+
       <!-- Bouton QUIZ DEF -->
       <a
         mat-button
@@ -72,6 +94,7 @@
       <!-- Levels à droite -->
      <div class="word-section">
 
+  
   <a
     *ngFor="let level of levels; let i = index"
     mat-button
@@ -83,6 +106,7 @@
     {{ level }}
 
   </a>
+  
 
   <!-- Bouton Load -->
   <label class="upload-btn">

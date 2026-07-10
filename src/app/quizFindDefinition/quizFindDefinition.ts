@@ -76,7 +76,7 @@ export class QuizFindDefinition implements OnInit {
       this.correctAnswerToShow.set(q.definition);
     }
 
-    this.quizService.sendAnswer(q.id, correct ? this.showHint() ? 3 : 5 : 1).subscribe();
+    this.quizService.sendAnswer(q.id, correct ? this.showHint() ? 1 : 2 : -1).subscribe();
 
     const delay = correct ? 1000 : 2000;
 

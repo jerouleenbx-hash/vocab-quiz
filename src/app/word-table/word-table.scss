@@ -1,0 +1,108 @@
+/* Conteneur du tableau (même largeur que le header) */
+.word-table-container {
+  width: 95%; /* Même largeur que .menu-container */
+  margin: 20px auto 0; /* Marge supérieure pour l'espacement */
+  background-color: #c5c9e9;
+  border-radius: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Tableau (largeur 100% du conteneur) */
+.word-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* En-tête du tableau */
+.word-table th {
+  background-color: #4c4041;
+  color: white;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: bold;
+  border-right: 1px solid #5a5253;
+}
+
+.word-table th:last-child {
+  border-right: none;
+}
+
+/* Cellules du tableau */
+.word-table td {
+  padding: 8px 12px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+}
+
+.word-table td:last-child {
+  border-right: none;
+}
+
+/* Dernière ligne sans bordure basse */
+.word-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Survol des lignes */
+.word-table tr:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+/* Ligne révélée */
+.word-table tr.revealed {
+  background-color: #e9f7fe;
+}
+
+/* Pagination (même largeur que le tableau) */
+.pagination {
+  width: 90%; /* Même largeur que le tableau et le header */
+  margin: 10px auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Boutons de pagination */
+.pagination button {
+  height: 36px;
+  min-width: 100px;
+  padding: 0 14px;
+  background-color: rgb(190, 186, 186);
+  color: #4c4041;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.pagination span {
+  font-weight: bold;
+  color: #4c4041;
+}
+
+.word-title-container {
+  display: flex;          /* Active le mode flexbox */
+  align-items: center;   /* Aligne verticalement au centre */
+  gap: 8px;              /* Espace entre le texte et le dot */
+}
+
+.score-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;    /* Pour un cercle */
+}

@@ -23,10 +23,10 @@ export class Header implements OnInit {
 
   tags$!: Observable<string[]>;
   categories$!: Observable<string[]>;
-  selectedCategory: string = "BASIC WORDS";
-  selectedTag: string = "Basic words";
+  selectedCategory: string = "Destination C1-C2";
+  selectedTag: string = "Unit 02";
   selectedLevel: string = "All"; // par défaut, ou le premier level
-  selectedAction: 'list' | 'quizDef' | 'quizWord' = 'list'; // action sélectionnée par défaut
+  selectedAction: 'table' | 'list' | 'quizDef' | 'quizWord' = 'list'; // action sélectionnée par défaut
 
   showPopup: boolean = false;
   popupMessage: string = 'a';
@@ -71,6 +71,7 @@ export class Header implements OnInit {
   }
 
   goToQuizWord() {
+    console.log('Quiz word');
       this.selectedAction = 'quizWord';
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/quizFindWord']);
@@ -78,6 +79,26 @@ export class Header implements OnInit {
   }
 
   goToList() {
+      this.globalService.setTag(this.selectedTag);
+      this.selectedAction = 'list';
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/listWord']);
+      this.cdr.detectChanges(); // Force la détection de changement
+    });
+  }
+
+
+  goToTable() {
+      this.globalService.setTag(this.selectedTag);
+      this.selectedAction = 'table';
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/tableWord']);
+      this.cdr.detectChanges(); // Force la détection de changement
+    });
+  }
+
+
+  switch() {
       this.globalService.setTag(this.selectedTag);
       this.selectedAction = 'list';
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

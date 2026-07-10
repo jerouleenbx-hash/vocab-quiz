@@ -1,0 +1,43 @@
+<div class="word-table-container">
+<table class="word-table">
+  <thead>
+    <tr>
+      <th>Word (level)</th>
+      <th>Definition</th>
+      <th>Exemple</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (word of words$ | async; track word.id) {
+      <tr [class.revealed]="isRevealed(word)" (click)="toggleReveal(word)">
+        <td>
+          <div class="word-title-container">
+
+            <div
+              class="score-dot"
+              [ngStyle]="{'background-color': getScoreColor(word)}"
+            ></div>
+            <span>{{ word.word }} ({{ word.difficulty }})</span>
+          </div>
+        </td>
+        <td>
+            <div class="word-details">
+              <p><strong>Définition :</strong> {{ word.definition }}</p>          
+            </div>
+        </td>
+        <td>
+          @if (word.example_sentence) {
+            <p><strong>Exemple :</strong> {{ word.example_sentence }}</p>
+          }
+        </td>          
+      </tr>
+    }
+  </tbody>
+</table>
+</div>
+
+<div class="pagination" *ngIf="totalPages$ | async as totalPages">
+  <button (click)="prevPage()">⬅ Précédent</button>
+  <span>Page {{ page$ | async }} / {{ totalPages }}</span>
+  <button (click)="nextPage(totalPages)">Suivant ➡</button>
+</div>

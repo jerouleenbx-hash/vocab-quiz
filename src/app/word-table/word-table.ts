@@ -7,18 +7,18 @@ import { GlobalService } from '../services/global.service';
 import { SimpleWord } from '../models/interfaces';
 
 @Component({
-  selector: 'app-word-list',
+  selector: 'app-word-table',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './word-list.html',
-  styleUrls: ['./word-list.scss']
+  templateUrl: './word-table.html',
+  styleUrls: ['./word-table.scss']
 })
-export class WordListComponent {
+export class WordTableComponent {
 
   private pageSubject = new BehaviorSubject<number>(1);
   page$ = this.pageSubject.asObservable();
 
-  pageSize = 15;
+  pageSize = 8;
 
   words$: Observable<SimpleWord[]>;
   totalPages$: Observable<number>;
@@ -74,6 +74,8 @@ export class WordListComponent {
   isRevealed(word: SimpleWord) {    
     return this.revealed.has(word.id);
   }
+
+
 
   getScoreColor(word: SimpleWord): string {
     
