@@ -4,6 +4,15 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../services/global.service';
 
+type QuizResult = {
+  questionId: number;
+  word: string;
+  difficulty: string;
+  userAnswer: string | null;
+  correctAnswer: string;
+  correct: boolean;
+};
+
 @Component({
   selector: 'app-quiz',
   standalone: true,
@@ -18,8 +27,8 @@ export class QuizFindDefinition implements OnInit {
   score = signal(0);
   showHint = signal(false);
   correctAnswerToShow = signal<string | null>(null);
-
-  totalQuestions = 5;
+  results = signal<QuizResult[]>([]);
+  totalQuestions = 8;
   currentIndex = signal<number>(0);
   difficulty: string = 'A1';
   tag: string = "Basic words";
@@ -76,6 +85,18 @@ export class QuizFindDefinition implements OnInit {
       this.correctAnswerToShow.set(q.definition);
     }
 
+this.results.update(list => [
+  ...list,
+  {
+    questionId: q.id,
+    word: q.word,
+    difficulty: q.difficulty,
+    userAnswer: choice,
+    correctAnswer: q.definition,
+    correct
+  }
+]);
+
     this.quizService.sendAnswer(q.id, correct ? this.showHint() ? 1 : 2 : -1).subscribe();
 
     const delay = correct ? 1000 : 2000;
@@ -97,8 +118,9 @@ export class QuizFindDefinition implements OnInit {
     return Math.round(((this.currentIndex()) / this.totalQuestions) * 100);
   }
 
-  restartQuiz() {
-    this.score.set(0);
-    this.loadQuestions();
-  }
+restartQuiz() {
+  this.score.set(0);
+  this.results.set([]);
+  this.loadQuestions();
+}
 }

@@ -38,22 +38,34 @@ export class Header implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
-    this.categories$ = this.wordService.getAllCategories().pipe(
+ngOnInit() {
+  this.categories$ = this.wordService.getAllCategories().pipe(
     map(categories => categories.sort((a, b) => a.localeCompare(b)))
-    );
+  );
 
-    this.tags$ = this.wordService.getAllTags(this.selectedCategory).pipe(
+  // 1) set catégorie par défaut
+  this.globalService.setCategory(this.selectedCategory);
+
+  // 2) charger les tags de cette catégorie
+  this.tags$ = this.wordService.getAllTags(this.selectedCategory).pipe(
     map(tags => tags.sort((a, b) => a.localeCompare(b)))
-    );
+  );
 
-    // définir le tag par défaut dans le service
-    this.globalService.setCategory(this.selectedCategory);
+  // 3) une fois les tags chargés, choisir le tag par défaut, puis naviguer
+  this.tags$.subscribe(tags => {
+    if (tags.length === 0) return;
+
+    // si ton tag par défaut existe dans la liste => on le garde, sinon => premier tag
+    const defaultTagExists = tags.includes(this.selectedTag);
+    this.selectedTag = defaultTagExists ? this.selectedTag : tags[0];
+
     this.globalService.setTag(this.selectedTag);
-    
-    this.goToList();
+    this.changeLevel('All'); // optionnel, si tu veux garantir le niveau
 
-  }
+    this.goToList();
+  });
+}
+
 
   goToDefLevel(level: string) {
     // navigation programmatique
@@ -96,17 +108,6 @@ export class Header implements OnInit {
       this.cdr.detectChanges(); // Force la détection de changement
     });
   }
-
-
-  switch() {
-      this.globalService.setTag(this.selectedTag);
-      this.selectedAction = 'list';
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/listWord']);
-      this.cdr.detectChanges(); // Force la détection de changement
-    });
-  }
-  
 
   changeLevel(level: string) {
     this.globalService.setLevel(level);

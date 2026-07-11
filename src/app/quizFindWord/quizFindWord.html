@@ -70,8 +70,42 @@
 }
 @else {
   <!-- Fin du quiz -->
-  <div class="quiz-end">
-    <p>Quiz finished ! Score : {{ score() }} / {{ totalQuestions }}</p>
-    <button type="button" (click)="restartQuiz()">Again !</button>
-  </div>
+<div class="quiz-end">
+  
+<div class="results-table-container">
+  <table class="results-table">
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Your answer</th>
+        <th>Good answer</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (r of results(); track r.questionId) {
+        <tr>
+          <td>
+            <div><strong>{{ r.definition }}</strong></div>
+          </td>
+          <td
+            class="result-cell"
+            [class.correct]="r.correct"
+            [class.incorrect]="!r.correct">
+            <div class="sub">{{ r.userAnswer ?? '—' }} {{ r.correct ? (' ✅') : (' ❌') }}</div>
+          </td>
+          <td
+            class="result-cell"
+            [class.correct]="r.correct"
+            [class.incorrect]="!r.correct"
+          >
+            {{ r.word }}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+</div>
+
 }

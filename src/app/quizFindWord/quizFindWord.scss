@@ -119,7 +119,7 @@ button.selected {
 
 /* Fin du quiz */
 .quiz-end {
-  max-width: 500px;
+  width: 100%;
   margin: 2rem auto;
   text-align: center;
 }
@@ -169,3 +169,112 @@ button.selected {
   background-color: #45a049;
 }
 
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    vertical-align: top;
+  }
+}
+
+.result-cell {
+  font-weight: 600;
+}
+
+.result-cell.correct {
+  background: #d4edda; // vert clair
+  color: #155724;
+}
+
+.result-cell.incorrect {
+  background: #fff3cd; // jaune clair
+  color: #856404;
+}
+
+.sub {
+  color: #666;
+  font-size: 0.95em;
+}
+
+/* Conteneur du tableau résultats */
+.results-table-container {
+  width: 95%;
+  margin: 20px auto 0;
+  background-color: #c5c9e9;
+  border-radius: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Tableau */
+.results-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* En-tête */
+.results-table th {
+  background-color: #4c4041;
+  color: white;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: bold;
+  border-right: 1px solid #5a5253;
+}
+
+.results-table th:last-child {
+  border-right: none;
+}
+
+/* Cellules */
+.results-table td {
+  padding: 8px 12px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+}
+
+.results-table td:last-child {
+  border-right: none;
+}
+
+/* Dernière ligne sans bordure basse */
+.results-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Survol */
+.results-table tr:hover {
+  background-color: #f0f0f0;
+  cursor: default;
+}
+
+/* Style colonnes */
+.sub {
+  color: #666;
+  font-size: 0.95em;
+}
+
+.result-cell {
+  font-weight: 600;
+}
+
+/* Vert si bon, jaune si mauvais */
+.result-cell.correct {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.result-cell.incorrect {
+  background-color: #fff3cd;
+  color: #856404;
+}

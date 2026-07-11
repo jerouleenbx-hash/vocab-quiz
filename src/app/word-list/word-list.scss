@@ -1,8 +1,19 @@
-.word-container {
+.word-list-container {
+  width: 100%;
+  height: calc(100vh - 80px); /* ajuste 80px selon ton header/menu */
+  overflow-y: auto;          /* seul endroit scroll */
+  overflow-x: hidden;        /* pas d’horizontal */
+  padding: 0 0 10px;
+  box-sizing: border-box;
+}
 
+.word-container {
   width: 90%;
-  margin: 40px auto;
+  margin: 40px auto 0;
   padding: 10px;
+
+  overflow: visible;
+  box-sizing: border-box;
 
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -10,19 +21,16 @@
 }
 
 .word-card {
-  width: 100%;
+  width: 260px;
+  min-width: 0;
+  box-sizing: border-box;
   height: 180px;
-  background: #ffffff;
+  background-color: #c5c9e9;
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid #e0e0e0;
   border: 2px solid #ddd;
-  border-radius: 12px;
-  background-color: #c5c9e9;
-  cursor: pointer;
 
-  width: 260px;       // fixed width
-  height: 180px;      // fixed height
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -36,34 +44,14 @@
   }
 }
 
-.word-header {
-  font-size: 18px;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 8px;
-}
-
 .word-body {
   font-size: 14px;
   line-height: 1.4;
   margin-top: 6px;
-  overflow-y: auto;   // scroll if content is too long
-  flex-grow: 1;       // fills remaining height
-}
 
-.definition {
-  margin: 4px 0;
-}
-
-.example {
-  margin-top: 4px;
-  font-style: italic;
-  color: #555;
-}
-
-.word-body {
   opacity: 0;
   transition: opacity 0.3s ease;
+
   overflow-y: auto;
   flex-grow: 1;
 }
@@ -72,29 +60,12 @@
   opacity: 1;
 }
 
-.pagination {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-
-  button {
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: none;
-    background: #5562ea;
-    color: white;
-    cursor: pointer;
-
-    &:hover {
-      background: #3f4bd1;
-    }
-  }
-}
-
 .word-header {
-  position: relative; /* pour que le score-dot soit positionné par rapport au header */
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -104,5 +75,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  margin-left: 8px;
 }
+
+.definition { margin: 4px 0; }
+.example { margin-top: 4px; font-style: italic; color: #555; }

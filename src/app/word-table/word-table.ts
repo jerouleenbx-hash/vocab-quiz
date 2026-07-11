@@ -18,7 +18,7 @@ export class WordTableComponent {
   private pageSubject = new BehaviorSubject<number>(1);
   page$ = this.pageSubject.asObservable();
 
-  pageSize = 8;
+  pageSize = 8000;
 
   words$: Observable<SimpleWord[]>;
   totalPages$: Observable<number>;

@@ -35,9 +35,3 @@
   </tbody>
 </table>
 </div>
-
-<div class="pagination" *ngIf="totalPages$ | async as totalPages">
-  <button (click)="prevPage()">⬅ Précédent</button>
-  <span>Page {{ page$ | async }} / {{ totalPages }}</span>
-  <button (click)="nextPage(totalPages)">Suivant ➡</button>
-</div>

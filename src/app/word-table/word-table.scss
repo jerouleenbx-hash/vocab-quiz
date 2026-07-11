@@ -106,3 +106,19 @@
   height: 12px;
   border-radius: 50%;    /* Pour un cercle */
 }
+
+.word-table-container{
+  width: 95%;
+  margin: 20px auto 0;
+  background-color: #c5c9e9;
+  border-radius: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+
+
+  /* ascenseur */
+  max-height: 85vh;     /* ajuste */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}

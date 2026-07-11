@@ -4,6 +4,15 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../services/global.service';
 
+type QuizResult = {
+  questionId: number;
+  definition: string;
+  difficulty: string;
+  word: string;       // bonne réponse
+  userAnswer: string | null; // réponse tapée / choisie
+  correct: boolean;
+};
+
 @Component({
   selector: 'app-quiz',
   standalone: true,
@@ -19,9 +28,8 @@ export class QuizFindWord implements OnInit {
   score = signal(0);
   showHint = signal(false);
   correctAnswerToShow = signal<string | null>(null);
-  feedbackMessage = signal<string | null>(null);
-
-  totalQuestions = 5;
+  results = signal<QuizResult[]>([]);
+  totalQuestions = 8;
   currentIndex = signal<number>(0);
   difficulty: string = 'A1';
   tag: string = "Basic words";
@@ -41,17 +49,21 @@ export class QuizFindWord implements OnInit {
     this.focusInput();
   }
 
+loadQuestions() {
+  const start = performance.now();
+  console.log('Request quiz word start', start);
 
-  loadQuestions() {
-    this.quizService.getQuizWord(this.difficulty, this.tag, this.userId).subscribe({
-      next: (qs) => {
-        this.questions.set(qs);
-        this.currentIndex.set(0);
-        this.loadCurrentQuestion();
-      },
-      error: (err) => console.error('Erreur API:', err),
-    });
-  }
+  this.quizService.getQuizWord(this.difficulty, this.tag, this.userId).subscribe({
+    next: (qs) => {
+      console.log('Request success after (ms):', performance.now() - start, 'count:', qs.length);
+      this.questions.set(qs);
+      this.currentIndex.set(0);
+      this.loadCurrentQuestion();
+    },
+    error: (err) => console.error('Erreur API:', err),
+  });
+}
+
 
   loadCurrentQuestion() {
     
@@ -81,6 +93,18 @@ export class QuizFindWord implements OnInit {
       this.correctAnswerToShow.set(q.word); // montrer la bonne réponse
     }
 
+    this.results.update(list => [
+  ...list,
+  {
+    questionId: q.id,
+    definition: q.definition,
+    difficulty: q.difficulty,
+    word: q.word,
+    userAnswer: choice,
+    correct
+  }
+]);
+
     this.quizService.sendAnswer(q.id, correct ? 1 : -1).subscribe();
 
     const delay = correct ? 1000 : 2000;
@@ -109,6 +133,18 @@ export class QuizFindWord implements OnInit {
     } else {
       this.correctAnswerToShow.set(q.word); // montrer la bonne réponse
     }
+
+    this.results.update(list => [
+  ...list,
+  {
+    questionId: q.id,
+    definition: q.definition,
+    difficulty: q.difficulty,
+    word: q.word,
+    userAnswer: choice,
+    correct
+  }
+]);
 
     this.quizService.sendAnswer(q.id, correct ? 2 : -1).subscribe();
 
@@ -140,9 +176,10 @@ export class QuizFindWord implements OnInit {
     return Math.round(((this.currentIndex()-1) / this.totalQuestions) * 100);
   }
 
-  restartQuiz() {
-    this.score.set(0);
-    this.loadQuestions();
-  }
+restartQuiz() {
+  this.score.set(0);
+  this.results.set([]);
+  this.loadQuestions();
+}
 
 }
