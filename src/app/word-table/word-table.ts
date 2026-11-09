@@ -6,6 +6,9 @@ import { WordService } from '../services/word.service';
 import { GlobalService } from '../services/global.service';
 import { SimpleWord } from '../models/interfaces';
 
+type SortColumn = 'word' | 'definition' | 'example_sentence' | 'type';
+type SortDirection = 'asc' | 'desc';
+
 @Component({
   selector: 'app-word-table',
   standalone: true,
@@ -17,6 +20,13 @@ export class WordTableComponent {
 
   private pageSubject = new BehaviorSubject<number>(1);
   page$ = this.pageSubject.asObservable();
+  private sortSubject = new BehaviorSubject<{ column: SortColumn; direction: SortDirection }>({
+    column: 'word',
+    direction: 'asc'
+  });
+
+  sortColumn: SortColumn = 'word';
+  sortDirection: SortDirection = 'asc';
 
   pageSize = 8000;
 
@@ -32,11 +42,12 @@ export class WordTableComponent {
 
     const allWords$ = combineLatest([
       this.globalService.tag$,
-      this.globalService.level$
+      this.globalService.level$,
+      this.globalService.type$
     ]).pipe(
-      switchMap(([tag, level]) => {
+      switchMap(([tag, level, type]) => {
         if (!tag) return of([]);
-        return this.wordService.getAllWords(level, tag);
+        return this.wordService.getAllWords(level, tag, this.globalService.currentCategory, type);
       })
     );
 
@@ -44,12 +55,27 @@ export class WordTableComponent {
       map(words => Math.ceil(words.length / this.pageSize))
     );
 
-    this.words$ = combineLatest([allWords$, this.page$]).pipe(
-      map(([words, page]) => {
+    this.words$ = combineLatest([allWords$, this.page$, this.sortSubject]).pipe(
+      map(([words, page, sort]) => {
+        const sortedWords = [...words].sort((a, b) => {
+          const comparison = String(a[sort.column] ?? '').localeCompare(
+            String(b[sort.column] ?? ''),
+            'en',
+            { sensitivity: 'base', numeric: true }
+          );
+          return sort.direction === 'asc' ? comparison : -comparison;
+        });
         const start = (page - 1) * this.pageSize;
-        return words.slice(start, start + this.pageSize);
+        return sortedWords.slice(start, start + this.pageSize);
       })
     );
+  }
+
+  toggleSort(column: SortColumn) {
+    const direction = this.sortColumn === column && this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortColumn = column;
+    this.sortDirection = direction;
+    this.sortSubject.next({ column, direction });
   }
 
   nextPage(totalPages: number) {

@@ -10,6 +10,15 @@
         class="menu-item"
         (click)="switch()"
         [ngStyle]="{'background-color': wordButtonColors[1]}"
+      <a
+        mat-button
+        class="menu-item"
+        (click)="goToExercises()"
+        [ngStyle]="{'background-color': wordButtonColors[1]}"
+        [class.active-action]="selectedAction === 'exercises'">
+        Exercices
+      </a>
+
         [class.active-action]="selectedAction === 'list'">
         Switch
       </a>
@@ -24,11 +33,13 @@
       <!-- Select Category -->
       <div class="menu-item">
         <select
-          id="tag-select"
+          id="category-select"
+          aria-label="Category"
           (change)="onCategoryChangeFromEvent($event)"
           [value]="selectedCategory">
 
           <option value="" disabled>Select a category</option>
+          <option value="All">All categories</option>
           <option *ngFor="let category of categories$ | async" [value]="category">
             {{ category }}
           </option>
@@ -40,12 +51,30 @@
       <div class="menu-item">
         <select
           id="tag-select"
+          aria-label="Tag"
           (change)="onTagChangeFromEvent($event)"
           [value]="selectedTag">
 
           <option value="" disabled>Select a tag</option>
+          <option value="All">All tags</option>
           <option *ngFor="let tag of tags$ | async" [value]="tag">
             {{ tag }}
+          </option>
+
+        </select>
+      </div>
+
+      <!-- Select Type -->
+      <div class="menu-item">
+        <select
+          id="type-select"
+          aria-label="Type"
+          (change)="onTypeChangeFromEvent($event)"
+          [value]="selectedType">
+
+          <option value="All">All types</option>
+          <option *ngFor="let type of types$ | async" [value]="type">
+            {{ type }}
           </option>
 
         </select>
@@ -70,6 +99,15 @@
         [ngStyle]="{'background-color': wordButtonColors[1]}"
         [class.active-action]="selectedAction === 'table'">
         Table
+      </a>
+
+      <a
+        mat-button
+        class="menu-item"
+        (click)="goToExercises()"
+        [ngStyle]="{'background-color': wordButtonColors[1]}"
+        [class.active-action]="selectedAction === 'exercises'">
+        Exercices
       </a>
 
       <!-- Bouton QUIZ DEF -->

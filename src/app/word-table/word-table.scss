@@ -33,6 +33,22 @@
   border-right: none;
 }
 
+.sort-button {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sort-button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
 /* Cellules du tableau */
 .word-table td {
   padding: 8px 12px;

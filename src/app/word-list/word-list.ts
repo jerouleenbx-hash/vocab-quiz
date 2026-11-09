@@ -32,11 +32,12 @@ export class WordListComponent {
 
     const allWords$ = combineLatest([
       this.globalService.tag$,
-      this.globalService.level$
+      this.globalService.level$,
+      this.globalService.type$
     ]).pipe(
-      switchMap(([tag, level]) => {
+      switchMap(([tag, level, type]) => {
         if (!tag) return of([]);
-        return this.wordService.getAllWords(level, tag);
+        return this.wordService.getAllWords(level, tag, this.globalService.currentCategory, type);
       })
     );
 

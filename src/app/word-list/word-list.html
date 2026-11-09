@@ -3,7 +3,7 @@
     @for (word of words$ | async; track word.id) {
       <div class="word-card" [class.revealed]="isRevealed(word)" (click)="toggleReveal(word)">
         <div class="word-header">
-          <span class="word-title">{{ word.word }} ({{ word.difficulty}})</span>
+          <span class="word-title">{{ word.word }} </span>
           <div class="score-dot" [ngStyle]="{'background-color': getScoreColor(word)}"></div>
         </div>
 

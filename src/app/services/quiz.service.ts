@@ -17,19 +17,23 @@ export class QuizService {
 
   constructor(private http: HttpClient) {}
 
-  getQuizDefinition(level: string, tag: string, userId: number): Observable<MultipleChoiceWord[]> {
+  getQuizDefinition(level: string, tag: string, userId: number, category = 'All', type = 'All'): Observable<MultipleChoiceWord[]> {
     let params = new HttpParams()
       .set('level', level)
       .set('tag', tag)
+      .set('category', category)
+      .set('type', type)
       .set('userId', userId.toString());
 
     return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/quiz/definition`, { params });
   }
 
-  getQuizWord(level: string, tag: string, userId: number): Observable<MultipleChoiceWord[]> {
+  getQuizWord(level: string, tag: string, userId: number, category = 'All', type = 'All'): Observable<MultipleChoiceWord[]> {
     let params = new HttpParams()
       .set('level', level)
       .set('tag', tag)
+      .set('category', category)
+      .set('type', type)
       .set('userId', userId.toString());
 
     return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/quiz/word`, { params });

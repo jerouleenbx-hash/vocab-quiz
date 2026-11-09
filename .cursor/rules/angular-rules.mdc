@@ -1,0 +1,10 @@
+---
+description: Règles de développement pour ce projet Angular moderne
+alwaysApply: true
+---
+Act as an expert Angular developer. Follow these core guidelines:
+- Use modern Angular syntax (Angular 18+).
+- Prefer Angular Signals (`input()`, `output()`, `computed`, `signal`) over RxJS whenever possible.
+- Use the native control flow (`@if`, `@for`, `@switch`) instead of legacy structural directives (`*ngIf`, `*ngFor`).
+- Use the `inject()` function for dependency injection instead of constructor injection.
+- Always enforce Strict TypeScript typing (avoid `any`).

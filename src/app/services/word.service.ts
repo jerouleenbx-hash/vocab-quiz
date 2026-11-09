@@ -19,11 +19,13 @@ export class WordService {
 
   constructor(private http: HttpClient) {}
 
-getAllWords(level: string, tag: string): Observable<SimpleWord[]> {
+getAllWords(level: string, tag: string, category = 'All', type = 'All'): Observable<SimpleWord[]> {
   return this.http.get<SimpleWord[]>(`${this.apiUrl}/words`, {
     params: {
       tag: tag,
-      level: level
+      level: level,
+      category,
+      type
     }
   });
 }
@@ -33,7 +35,7 @@ getAllTags(category?: string): Observable<string[]> {
     map(words => {
       // Filtrer par catégorie si spécifiée
       const filteredWords = category
-        ? words.filter(w => w.category === category)
+        ? words.filter(w => category === 'All' || w.category?.split(',').some(value => value.trim() === category))
         : words;
 
       // Extraire tous les tags non vides
@@ -63,6 +65,17 @@ getAllCategories(): Observable<string[]> {
       // Supprimer les doublons
       return Array.from(new Set(categories));
     })
+  );
+}
+
+getAllTypes(): Observable<string[]> {
+  return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
+    map(words => Array.from(new Set(
+      words
+        .map(word => word.type)
+        .filter(type => type && type.trim())
+        .map(type => type.trim())
+    )))
   );
 }
 

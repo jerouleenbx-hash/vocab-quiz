@@ -2,9 +2,26 @@
 <table class="word-table">
   <thead>
     <tr>
-      <th>Word (level)</th>
-      <th>Definition</th>
-      <th>Exemple</th>
+      <th [attr.aria-sort]="sortColumn === 'word' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'">
+        <button class="sort-button" type="button" (click)="toggleSort('word')">
+          Word (level)<span aria-hidden="true">{{ sortColumn === 'word' ? (sortDirection === 'asc' ? ' ▲' : ' ▼') : '' }}</span>
+        </button>
+      </th>
+      <th [attr.aria-sort]="sortColumn === 'definition' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'">
+        <button class="sort-button" type="button" (click)="toggleSort('definition')">
+          Definition<span aria-hidden="true">{{ sortColumn === 'definition' ? (sortDirection === 'asc' ? ' ▲' : ' ▼') : '' }}</span>
+        </button>
+      </th>
+      <th [attr.aria-sort]="sortColumn === 'example_sentence' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'">
+        <button class="sort-button" type="button" (click)="toggleSort('example_sentence')">
+          Exemple<span aria-hidden="true">{{ sortColumn === 'example_sentence' ? (sortDirection === 'asc' ? ' ▲' : ' ▼') : '' }}</span>
+        </button>
+      </th>
+      <th [attr.aria-sort]="sortColumn === 'type' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'">
+        <button class="sort-button" type="button" (click)="toggleSort('type')">
+          Type<span aria-hidden="true">{{ sortColumn === 'type' ? (sortDirection === 'asc' ? ' ▲' : ' ▼') : '' }}</span>
+        </button>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -17,19 +34,20 @@
               class="score-dot"
               [ngStyle]="{'background-color': getScoreColor(word)}"
             ></div>
-            <span>{{ word.word }} ({{ word.difficulty }})</span>
+            <span>{{ word.word }} </span>
           </div>
         </td>
         <td>
             <div class="word-details">
-              <p><strong>Définition :</strong> {{ word.definition }}</p>          
+              <p>{{ word.definition }}</p>
             </div>
         </td>
         <td>
           @if (word.example_sentence) {
-            <p><strong>Exemple :</strong> {{ word.example_sentence }}</p>
+            <p>{{ word.example_sentence }}</p>
           }
-        </td>          
+        </td>
+        <td>{{ word.type }}</td>
       </tr>
     }
   </tbody>

@@ -53,7 +53,13 @@ loadQuestions() {
   const start = performance.now();
   console.log('Request quiz word start', start);
 
-  this.quizService.getQuizWord(this.difficulty, this.tag, this.userId).subscribe({
+  this.quizService.getQuizWord(
+    this.difficulty,
+    this.tag,
+    this.userId,
+    this.globalService.currentCategory,
+    this.globalService.currentType
+  ).subscribe({
     next: (qs) => {
       console.log('Request success after (ms):', performance.now() - start, 'count:', qs.length);
       this.questions.set(qs);

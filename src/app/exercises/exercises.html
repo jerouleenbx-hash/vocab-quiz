@@ -1,0 +1,126 @@
+<main class="exercise-page">
+  <nav class="study-tabs" aria-label="Study sections">
+    <a [routerLink]="currentLessonLink">Lesson</a>
+    <a class="active" [routerLink]="['/exercises']" [queryParams]="{unit: currentUnit}">Exercises</a>
+    <a [routerLink]="reviewLink">Review</a>
+  </nav>
+
+  <nav class="unit-navigation" aria-label="Choisir une unité">
+    @for (unit of availableUnits; track unit) {
+      <button
+        type="button"
+        [class.active]="currentUnit === unit"
+        [attr.aria-pressed]="currentUnit === unit"
+        (click)="selectUnit(unit)"
+      >Unit {{ unit }}</button>
+    }
+  </nav>
+
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">UNIT {{ currentUnit }} · {{ currentUnit === 1 || currentUnit === 3 ? 'GRAMMAR' : 'VOCABULARY' }}</p>
+      <h1>Exercices</h1>
+    </div>
+    <a class="lesson-link" [routerLink]="currentLessonLink">Lesson</a>
+  </header>
+
+  @let section = currentSection;
+
+  <nav class="exercise-navigation" aria-label="Navigation entre les exercices">
+    <button
+      type="button"
+      class="navigation-arrow"
+      aria-label="Exercice précédent"
+      title="Exercice précédent"
+      [disabled]="currentSectionIndex === 0"
+      (click)="previousExercise()"
+    >←</button>
+    <span>Exercice {{ section.id }} · {{ currentSectionIndex + 1 }} / {{ sections.length }}</span>
+    <button
+      type="button"
+      class="navigation-arrow"
+      aria-label="Exercice suivant"
+      title="Exercice suivant"
+      [disabled]="currentSectionIndex === sections.length - 1"
+      (click)="nextExercise()"
+    >→</button>
+  </nav>
+
+  @if (section) {
+    <section class="exercise-section" [attr.aria-labelledby]="'section-' + section.id">
+      <div class="section-heading">
+        <div class="section-title">
+          <span class="section-letter">{{ section.id }}</span>
+          <div>
+            <h2 [id]="'section-' + section.id">{{ section.title }}</h2>
+            <p>{{ section.instruction }}</p>
+          </div>
+        </div>
+        <div class="section-actions">
+          @if (checkedSections[sectionStateKey(section)]) {
+            <span class="score">{{ sectionScore(section) }} / {{ sectionGapCount(section) }}</span>
+          }
+          <button type="button" class="action-button primary" (click)="checkedSections[sectionStateKey(section)] = true">
+            Vérifier
+          </button>
+          <button type="button" class="action-button" (click)="toggleCorrection(section)">
+            {{ visibleCorrections[sectionStateKey(section)] ? 'Masquer le corrigé' : 'Voir le corrigé' }}
+          </button>
+        </div>
+      </div>
+
+      @if (section.wordBox) {
+        <p class="word-bank" aria-label="Word box">
+          @for (word of section.wordBox; track word) {
+            <span>{{ word }}</span>
+          }
+        </p>
+      }
+
+      <ol class="question-list">
+        @for (question of section.questions; track question.number) {
+          <li class="question-row">
+            <span class="question-number">{{ question.number }}</span>
+            <p class="question-text">
+              @for (part of question.parts; track $index; let gapIndex = $index) {
+                {{ part }}
+                @if (gapIndex < question.answers.length) {
+                  @if (answerOptions(question, gapIndex).length) {
+                    <select
+                      class="answer-input answer-select"
+                      [attr.aria-label]="'Section ' + section.id + ', question ' + question.number + ', answer ' + (gapIndex + 1)"
+                      [ngModel]="userAnswers[answerKey(section, question.number, gapIndex)] ?? ''"
+                      [class.correct]="checkedSections[sectionStateKey(section)] && isCorrect(section, question, gapIndex)"
+                      [class.incorrect]="checkedSections[sectionStateKey(section)] && !isCorrect(section, question, gapIndex)"
+                      (ngModelChange)="setAnswer(section, question.number, gapIndex, $event)"
+                    >
+                      <option value="">Choisir...</option>
+                      @for (option of answerOptions(question, gapIndex); track option) {
+                        <option [value]="option">{{ option }}</option>
+                      }
+                    </select>
+                  } @else {
+                    <input
+                      class="answer-input"
+                      type="text"
+                      autocomplete="off"
+                      spellcheck="false"
+                      [attr.aria-label]="'Section ' + section.id + ', question ' + question.number + ', answer ' + (gapIndex + 1)"
+                      [value]="userAnswers[answerKey(section, question.number, gapIndex)] ?? ''"
+                      [class.correct]="checkedSections[sectionStateKey(section)] && isCorrect(section, question, gapIndex)"
+                      [class.incorrect]="checkedSections[sectionStateKey(section)] && !isCorrect(section, question, gapIndex)"
+                      (input)="updateAnswer(section, question.number, gapIndex, $event)"
+                    />
+                  }
+                  @if (visibleCorrections[sectionStateKey(section)]) {
+                    <span class="correction">{{ acceptedAnswers(question, gapIndex).join(' / ') }}</span>
+                  }
+                }
+              }
+            </p>
+          </li>
+        }
+      </ol>
+    </section>
+  }
+</main>

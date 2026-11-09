@@ -1,0 +1,81 @@
+<main class="review-page">
+  <nav class="study-tabs" aria-label="Study sections">
+    <a [routerLink]="lessonLink">Lesson</a>
+    <a [routerLink]="exerciseLink" [queryParams]="{unit: unitStart}">Exercises</a>
+    <a class="active" [routerLink]="['/review', reviewNumber]">Review</a>
+  </nav>
+
+  <header class="review-heading">
+    <div>
+      <p class="eyebrow">UNITS {{ unitStart }} AND {{ unitEnd }}</p>
+      <h1>Review {{ reviewNumber }}</h1>
+    </div>
+    <div class="review-total" aria-live="polite">
+      <strong>{{ totalScore }}</strong><span>/ 50</span>
+    </div>
+  </header>
+
+  @for (section of sections; track section.id) {
+    <section class="review-section" [attr.aria-labelledby]="'review-' + section.id">
+      <div class="review-section-heading">
+        <div class="review-section-title">
+          <span class="section-letter">{{ section.id }}</span>
+          <div>
+            <h2 [id]="'review-' + section.id">{{ section.title }}</h2>
+            <p>{{ section.instruction }}</p>
+          </div>
+        </div>
+        <div class="review-actions">
+          @if (checkedSections[section.id]) {
+            <span class="score">{{ sectionScore(section) }} / {{ sectionMax(section) }}</span>
+          }
+          <button type="button" class="action-button primary" (click)="checkedSections[section.id] = true">Check</button>
+          <button type="button" class="action-button" (click)="toggleCorrection(section.id)">
+            {{ visibleCorrections[section.id] ? 'Hide answers' : 'Show answers' }}
+          </button>
+        </div>
+      </div>
+
+      <ol class="review-question-list">
+        @for (question of section.questions; track question.number) {
+          <li class="review-question">
+            <span class="question-number">{{ question.number }}</span>
+            <p class="question-text">
+              {{ question.parts[0] }}
+              @if (question.options) {
+                <select
+                  class="answer-input answer-select"
+                  [attr.aria-label]="'Question ' + question.number"
+                  [(ngModel)]="answers[question.number]"
+                  [class.correct]="checkedSections[section.id] && isCorrect(question)"
+                  [class.incorrect]="checkedSections[section.id] && !isCorrect(question)"
+                >
+                  <option value="">Choose...</option>
+                  @for (option of question.options; track option) {
+                    <option [value]="option">{{ option }}</option>
+                  }
+                </select>
+              } @else {
+                <input
+                  class="answer-input"
+                  type="text"
+                  autocomplete="off"
+                  spellcheck="false"
+                  [style.width.ch]="question.number >= 11 && question.number <= 18 ? 34 : 18"
+                  [attr.aria-label]="'Question ' + question.number"
+                  [(ngModel)]="answers[question.number]"
+                  [class.correct]="checkedSections[section.id] && isCorrect(question)"
+                  [class.incorrect]="checkedSections[section.id] && !isCorrect(question)"
+                />
+              }
+              {{ question.parts[1] }}
+              @if (visibleCorrections[section.id]) {
+                <span class="correction">{{ question.answers.join(' / ') }}</span>
+              }
+            </p>
+          </li>
+        }
+      </ol>
+    </section>
+  }
+</main>

@@ -1,0 +1,82 @@
+<main class="lesson-page">
+  <nav class="study-tabs" aria-label="Study sections">
+    <a class="active" [routerLink]="lessonCategoryLink(selectedCategory)">Lesson</a>
+    <a [routerLink]="exerciseRoute" [queryParams]="{unit: currentUnit}">Exercises</a>
+    <a [routerLink]="reviewRoute">Review</a>
+  </nav>
+
+  <nav class="unit-navigation" aria-label="Choisir une unité">
+    @for (unit of availableUnits; track unit) {
+      <a
+        [routerLink]="lessonUnitLink(unit)"
+        [class.active]="currentUnit === unit"
+        [attr.aria-current]="currentUnit === unit ? 'page' : null"
+      >Unit {{ unit }}</a>
+    }
+  </nav>
+
+  <header class="lesson-heading">
+    <div>
+      <p class="eyebrow">LEÇON</p>
+      <h1>Unit {{ currentUnit }} : {{ unitHeading }}</h1>
+      <h2 class="lesson-category-title">{{ selectedCategory.title }}</h2>
+    </div>
+    <div class="lesson-heading-actions">
+      <a class="exercise-return" [routerLink]="exerciseLink" [queryParams]="exerciseQueryParams">
+        Exercises <span aria-hidden="true">→</span>
+      </a>
+      <p class="source-note">Livre, p. {{ lessonPages }}</p>
+    </div>
+  </header>
+
+  <nav class="lesson-index" aria-label="Catégories de la leçon">
+    @for (category of categories; track category.id) {
+      <a
+        [routerLink]="lessonCategoryLink(category)"
+        [class.active]="selectedCategory.id === category.id"
+        [attr.aria-current]="selectedCategory.id === category.id ? 'page' : null"
+      >{{ category.title }}</a>
+    }
+  </nav>
+
+  <div class="lesson-tools">
+    <p class="category-reference">{{ selectedCategory.reference }}</p>
+  </div>
+
+  @if ([2, 4, 6, 8].includes(currentUnit) && loading) {
+    <p class="lesson-status" role="status">Chargement du vocabulaire…</p>
+  } @else if ([2, 4, 6, 8].includes(currentUnit) && loadError && !selectedCategory.entries) {
+    <p class="lesson-status error" role="alert">Les définitions de cette unité n’ont pas pu être chargées. Vérifie que l’API est disponible, puis actualise la page.</p>
+  } @else {
+    <section class="lesson-section">
+      <p class="entry-count">{{ visibleEntries.length }} entrées</p>
+      @if (visibleEntries.length) {
+        @for (group of visibleEntryGroups; track $index) {
+          @if (group.title) {
+            <h2 class="lesson-subheading">{{ group.title }}</h2>
+          }
+          <dl class="lesson-entries">
+            @for (entry of group.entries; track entry.id) {
+              <div class="lesson-entry">
+                <dt>
+                  {{ entry.term }}
+                  @if (entry.partOfSpeech) {
+                    <span class="part-of-speech">{{ entry.partOfSpeech }}</span>
+                  }
+                </dt>
+                <dd>
+                  <span>{{ entry.definition }}</span>
+                  @if (entry.example) {
+                    <span class="entry-example">{{ entry.example }}</span>
+                  }
+                </dd>
+              </div>
+            }
+          </dl>
+        }
+      } @else {
+        <p class="empty-state">Aucune entrée dans cette rubrique.</p>
+      }
+    </section>
+  }
+</main>
