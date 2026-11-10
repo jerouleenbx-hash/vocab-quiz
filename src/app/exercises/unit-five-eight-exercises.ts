@@ -226,3 +226,162 @@ export const unitEightExerciseSections: ExerciseSection[] = [
     {number:3,parts:['The transition was ', '. (MOTION)'],answers:['motionless']}
   ]}
 ];
+
+export const unitNineExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitTenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitElevenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+export const unitTwelveExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitThirteenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitFourteenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitFifteenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitSixteenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitSeventeenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitEighteenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitNineteenExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitTwentyExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitTwentyOneExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitTwentyTwoExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitTwentyThreeExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+
+export const unitTwentyFourExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+export const unitTwentyFiveExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];
+export const unitTwentySixExerciseSections: ExerciseSection[] = [
+  { id: 'A', unitId: 5, title: 'Future forms', instruction: 'Choose the correct word or phrase.', questions: [
+    { number: 1, parts: ["Sonia looks like she's ", ' asleep any minute!'], answers: ['going to fall'], options: ['falling', 'going to fall'] },
+    { number: 2, parts: ["When I leave school, I'm ", ' a journalist.'], answers: ['going to be'], options: ['being', 'going to be'] },
+    { number: 3, parts: ['Watch out or you ', ' into trouble!'], answers: ['are going to get'], options: ['are getting', 'are going to get'] },
+    { number: 4, parts: ['The last bus ', ' at midnight.'], answers: ['leaves'], options: ['leaves', 'is leaving'] }
+  ]}
+];

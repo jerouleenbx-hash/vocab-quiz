@@ -41,14 +41,37 @@ interface LessonCategory {
 export class UnitTwoLessonPageComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   currentUnit: UnitId = 2;
-  readonly availableUnits: UnitId[] = [1, 2, 3, 4, 5, 6, 7, 8];
+  readonly availableUnits: UnitId[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
 
   get unitHeading(): string {
-    return { 1: 'Present time', 2: 'Thinking and learning', 3: 'Past time', 4: 'Change and technology', 5: 'Future time', 6: 'Time and work', 7: 'Passives and causatives', 8: 'Movement and transport' }[this.currentUnit];
-  }
-
-  get lessonPages(): string {
-    return { 1: '6–7', 2: '12–13', 3: '22–23', 4: '27–29', 5: '38–39', 6: '44–45', 7: '53–55', 8: '60–62' }[this.currentUnit];
+    return { 1: 'Present time', 
+             2: 'Thinking and learning', 
+             3: 'Past time', 
+             4: 'Change and technology', 
+             5: 'Future time', 
+             6: 'Time and work', 
+             7: 'Passives and causatives', 
+             8: 'Movement and transport',
+             9: 'Modals and semi-modals',
+             10: 'Communication and the media',
+             11: 'Conditionals',
+             12: 'Chance and nature',
+             13: '13',
+             14: '14',
+             15: '15',
+             16: '16',
+             17: '17',
+             18: '18',
+             19: '19',
+             20: '20',
+             21: '21',
+             22: '22',
+             23: '23',
+             24: '24',
+             25: '25',
+             26: '26'
+             }
+             [this.currentUnit];
   }
 
   readonly unitOneCategories: LessonCategory[] = [
@@ -321,6 +344,115 @@ export class UnitTwoLessonPageComponent implements OnInit {
     ] }
   ];
 
+  readonly unitNineCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 9', reference: 'Leçon Unit 9', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'passive-use', section: 'The passive', term: 'When to use the passive', definition: 'On emploie le passif lorsque l’agent est inconnu, évident ou sans importance, pour mettre l’information nouvelle en relief, ou dans un style formel.', example: 'The car was stolen at approximately 1:30 am.' }
+    ] }
+  ];
+
+  readonly unitTenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 10', reference: 'Leçon Unit 10', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-10-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitElevenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 11', reference: 'Leçon Unit 11', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-11-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitTwelveCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 12', reference: 'Leçon Unit 12', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-12-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitThirteenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 13', reference: 'Leçon Unit 13', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-13-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitFourteenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 14', reference: 'Leçon Unit 14', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-14-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitFifteenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 15', reference: 'Leçon Unit 15', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-15-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitSixteenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 16', reference: 'Leçon Unit 16', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-16-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitSeventeenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 17', reference: 'Leçon Unit 17', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-17-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitEighteenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 18', reference: 'Leçon Unit 18', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-18-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitNineteenCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 19', reference: 'Leçon Unit 19', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-19-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitTwentyCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 20', reference: 'Leçon Unit 20', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-20-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitTwentyOneCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 21', reference: 'Leçon Unit 21', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-21-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitTwentyTwoCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 22', reference: 'Leçon Unit 22', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-22-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitTwentyThreeCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 23', reference: 'Leçon Unit 23', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-23-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitTwentyFourCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 24', reference: 'Leçon Unit 24', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-24-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitTwentyFiveCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 25', reference: 'Leçon Unit 25', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-25-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  readonly unitTwentySixCategories: LessonCategory[] = [
+    { id: 'movement-idioms', title: 'Unit 26', reference: 'Leçon Unit 26', exerciseSection: 'A', exerciseRange: 'Exercices A–J', entries: [
+      { id: 'unit-26-entry', section: 'Grammar Section', term: 'New Term', definition: 'Definition text', example: 'Example sentence' }
+    ] }
+  ];
+
+  
   get categories(): LessonCategory[] {
     return {
       1: this.unitOneCategories,
@@ -330,7 +462,25 @@ export class UnitTwoLessonPageComponent implements OnInit {
       5: this.unitFiveCategories,
       6: this.unitSixCategories,
       7: this.unitSevenCategories,
-      8: this.unitEightCategories
+      8: this.unitEightCategories,
+      9: this.unitNineCategories,
+      10: this.unitTenCategories,
+      11: this.unitElevenCategories,
+      12: this.unitTwelveCategories,
+      13: this.unitThirteenCategories,
+      14: this.unitFourteenCategories,
+      15: this.unitFifteenCategories,
+      16: this.unitSixteenCategories,
+      17: this.unitSeventeenCategories,
+      18: this.unitEighteenCategories,
+      19: this.unitNineteenCategories,
+      20: this.unitTwentyCategories,
+      21: this.unitTwentyOneCategories,
+      22: this.unitTwentyTwoCategories,
+      23: this.unitTwentyThreeCategories,
+      24: this.unitTwentyFourCategories,
+      25: this.unitTwentyFiveCategories,
+      26: this.unitTwentySixCategories
     }[this.currentUnit];
   }
 
@@ -354,12 +504,38 @@ export class UnitTwoLessonPageComponent implements OnInit {
     return ['/lessons', String(unit), categories[0].id];
   }
 
+
   private categoriesForUnit(unit: UnitId): LessonCategory[] {
-    return {
-      1: this.unitOneCategories, 2: this.unitTwoCategories, 3: this.unitThreeCategories, 4: this.unitFourCategories,
-      5: this.unitFiveCategories, 6: this.unitSixCategories, 7: this.unitSevenCategories, 8: this.unitEightCategories
-    }[unit];
-  }
+  return {
+    1: this.unitOneCategories,
+    2: this.unitTwoCategories,
+    3: this.unitThreeCategories,
+    4: this.unitFourCategories,
+    5: this.unitFiveCategories,
+    6: this.unitSixCategories,
+    7: this.unitSevenCategories,
+    8: this.unitEightCategories,
+    9: this.unitNineCategories,
+    10: this.unitTenCategories,
+    11: this.unitElevenCategories,
+    12: this.unitTwelveCategories,
+    13: this.unitThirteenCategories,
+    14: this.unitFourteenCategories,
+    15: this.unitFifteenCategories,
+    16: this.unitSixteenCategories,
+    17: this.unitSeventeenCategories,
+    18: this.unitEighteenCategories,
+    19: this.unitNineteenCategories,
+    20: this.unitTwentyCategories,
+    21: this.unitTwentyOneCategories,
+    22: this.unitTwentyTwoCategories,
+    23: this.unitTwentyThreeCategories,
+    24: this.unitTwentyFourCategories,
+    25: this.unitTwentyFiveCategories,
+    26: this.unitTwentySixCategories
+  }[unit as number] || [];
+}
+
 
   lessonCategoryLink(category: LessonCategory): string[] {
     return ['/lessons', String(this.currentUnit), category.id];

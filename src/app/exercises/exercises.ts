@@ -6,9 +6,14 @@ import { extraExerciseSections } from './exercise-extra-sections';
 import { unitTwoExerciseSections } from './unit-two-exercises';
 import { unitThreeExerciseSections, unitFourExerciseSections } from './unit-three-four-exercises';
 import { unitFiveExerciseSections, unitSixExerciseSections, unitSevenExerciseSections, unitEightExerciseSections } from './unit-five-eight-exercises';
+import { unitNineExerciseSections, unitTenExerciseSections, unitElevenExerciseSections, unitTwelveExerciseSections } from './unit-five-eight-exercises';
+import { unitThirteenExerciseSections, unitFourteenExerciseSections, unitFifteenExerciseSections, unitSixteenExerciseSections } from './unit-five-eight-exercises';
+import { unitSeventeenExerciseSections, unitEighteenExerciseSections, unitNineteenExerciseSections, unitTwentyExerciseSections } from './unit-five-eight-exercises';
+import { unitTwentyOneExerciseSections, unitTwentyTwoExerciseSections, unitTwentyThreeExerciseSections, unitTwentyFourExerciseSections } from './unit-five-eight-exercises';
+import { unitTwentyFiveExerciseSections, unitTwentySixExerciseSections } from './unit-five-eight-exercises';
 
 export type SectionId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O';
-export type UnitId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type UnitId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
 export type LessonCategoryId =
   | 'unit-overview'
   | 'present-tenses' | 'present-perfect' | 'stative-verbs'
@@ -101,7 +106,25 @@ export class ExercisesComponent {
   readonly unit6Sections = unitSixExerciseSections;
   readonly unit7Sections = unitSevenExerciseSections;
   readonly unit8Sections = unitEightExerciseSections;
-  readonly availableUnits: UnitId[] = [1, 2, 3, 4, 5, 6, 7, 8];
+  readonly unit9Sections = unitNineExerciseSections;
+  readonly unit10Sections = unitTenExerciseSections;
+  readonly unit11Sections = unitElevenExerciseSections;
+  readonly unit12Sections = unitTwelveExerciseSections;
+  readonly unit13Sections = unitThirteenExerciseSections;
+  readonly unit14Sections = unitFourteenExerciseSections;
+  readonly unit15Sections = unitFifteenExerciseSections;
+  readonly unit16Sections = unitSixteenExerciseSections;
+  readonly unit17Sections = unitSeventeenExerciseSections;
+  readonly unit18Sections = unitEighteenExerciseSections;
+  readonly unit19Sections = unitNineteenExerciseSections;
+  readonly unit20Sections = unitTwentyExerciseSections;
+  readonly unit21Sections = unitTwentyOneExerciseSections;
+  readonly unit22Sections = unitTwentyTwoExerciseSections;
+  readonly unit23Sections = unitTwentyThreeExerciseSections;
+  readonly unit24Sections = unitTwentyFourExerciseSections;
+  readonly unit25Sections = unitTwentyFiveExerciseSections;
+  readonly unit26Sections = unitTwentySixExerciseSections;
+  readonly availableUnits: UnitId[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
 
   get sections(): ExerciseSection[] {
     return {
@@ -112,7 +135,25 @@ export class ExercisesComponent {
       5: this.unit5Sections,
       6: this.unit6Sections,
       7: this.unit7Sections,
-      8: this.unit8Sections
+      8: this.unit8Sections,
+      9: this.unit9Sections,
+      10: this.unit10Sections,
+      11: this.unit11Sections,
+      12: this.unit12Sections,
+      13: this.unit13Sections,
+      14: this.unit14Sections,
+      15: this.unit15Sections,
+      16: this.unit16Sections,
+      17: this.unit17Sections,
+      18: this.unit18Sections,
+      19: this.unit19Sections,
+      20: this.unit20Sections,
+      21: this.unit21Sections,
+      22: this.unit22Sections,
+      23: this.unit23Sections,
+      24: this.unit24Sections,
+      25: this.unit25Sections,
+      26: this.unit26Sections
     }[this.currentUnit];
   }
 
@@ -120,11 +161,21 @@ export class ExercisesComponent {
     return this.sections[this.currentSectionIndex];
   }
 
+  // Fait le lien entre les exercices et les leçons correspondantes pour la navigation
   get currentLessonCategory(): LessonCategoryId {
     if (this.currentUnit === 1) return 'unit-overview';
     if (this.currentUnit === 3) return 'past-time';
     if (this.currentUnit === 5) return 'future-time';
     if (this.currentUnit === 7) return 'passives';
+    if (this.currentUnit === 9) return 'unit-overview';
+    if (this.currentUnit === 11) return 'unit-overview';
+    if (this.currentUnit === 13) return 'unit-overview';
+    if (this.currentUnit === 15) return 'unit-overview';
+    if (this.currentUnit === 17) return 'unit-overview';
+    if (this.currentUnit === 19) return 'unit-overview';
+    if (this.currentUnit === 21) return 'unit-overview';
+    if (this.currentUnit === 23) return 'unit-overview';
+    if (this.currentUnit === 25) return 'unit-overview';
 
     if (this.currentUnit === 4) {
       const categories: Partial<Record<SectionId, LessonCategoryId>> = {
@@ -155,6 +206,105 @@ export class ExercisesComponent {
       };
       return categories[this.currentSection.id] ?? 'movement-topic';
     }
+
+    if (this.currentUnit === 10) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }
+
+    if (this.currentUnit === 12) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }
+
+    if (this.currentUnit === 14) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }
+
+    if (this.currentUnit === 16) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }
+
+    if (this.currentUnit === 18) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }
+
+    if (this.currentUnit === 20) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }            
+
+    if (this.currentUnit === 22) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }            
+
+    if (this.currentUnit === 24) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }            
+
+    if (this.currentUnit === 26) {
+      const categories: Partial<Record<SectionId, LessonCategoryId>> = {
+        A: 'change-topic', B: 'change-topic', C: 'change-topic',
+        D: 'technology-topic', E: 'technology-topic',
+        F: 'technology-phrasal', G: 'technology-phrasal', H: 'technology-phrasal',
+        I: 'technology-collocations', J: 'technology-collocations', K: 'technology-collocations',
+        L: 'technology-idioms', M: 'technology-word-formation', N: 'technology-word-formation'
+      };
+      return categories[this.currentSection.id] ?? 'change-topic';
+    }            
 
     const categories: Partial<Record<SectionId, LessonCategoryId>> = {
       A: 'thinking', B: 'thinking', C: 'thinking', D: 'learning',
@@ -217,7 +367,7 @@ export class ExercisesComponent {
     route.queryParamMap.subscribe(params => {
       const requestedUnit = params.get('unit');
       const requestedSection = params.get('section') as SectionId | null;
-      if (!['1', '2', '3', '4', '5', '6', '7', '8'].includes(requestedUnit ?? '')) return;
+      if (!['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15','16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26'].includes(requestedUnit ?? '')) return;
 
       this.currentUnit = Number(requestedUnit) as UnitId;
       const sectionIndex = requestedSection
