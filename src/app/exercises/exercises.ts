@@ -19,7 +19,7 @@ import { unitTwentyOneExerciseSections, unitTwentyTwoExerciseSections } from './
 import { unitTwentyThreeExerciseSections, unitTwentyFourExerciseSections } from './unit-23-24-exercises';
 import { unitTwentyFiveExerciseSections, unitTwentySixExerciseSections } from './unit-25-26-exercises';
 
-export type SectionId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O';
+export type SectionId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O'| 'P';
 export type UnitId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
 export type LessonCategoryId =
   | 'unit-overview'

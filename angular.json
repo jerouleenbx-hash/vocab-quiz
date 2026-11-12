@@ -30,7 +30,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "public/scss/lessons.scss",
+                "bundleName": "lessons",
+                "inject": false
+              }
             ]
           },
           "configurations": {

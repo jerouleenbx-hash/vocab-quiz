@@ -43,10 +43,10 @@
             <span class="score">{{ sectionScore(section) }} / {{ sectionGapCount(section) }}</span>
           }
           <button type="button" class="action-button primary" (click)="checkedSections[sectionStateKey(section)] = true">
-            Vérifier
+            Verify
           </button>
           <button type="button" class="action-button" (click)="toggleCorrection(section)">
-            {{ visibleCorrections[sectionStateKey(section)] ? 'Masquer le corrigé' : 'Voir le corrigé' }}
+            {{ visibleCorrections[sectionStateKey(section)] ? 'Hide the correction' : 'Show the correction' }}
           </button>
         </div>
       </div>
@@ -76,7 +76,7 @@
                       [class.incorrect]="checkedSections[sectionStateKey(section)] && !isCorrect(section, question, gapIndex)"
                       (ngModelChange)="setAnswer(section, question.number, gapIndex, $event)"
                     >
-                      <option value="">Choisir...</option>
+                      <option value="">Choose...</option>
                       @for (option of answerOptions(question, gapIndex); track option) {
                         <option [value]="option">{{ option }}</option>
                       }
