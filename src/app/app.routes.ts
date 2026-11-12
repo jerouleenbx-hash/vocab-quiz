@@ -5,21 +5,14 @@ import { Header } from './header/header';
 import { WordListComponent } from './word-list/word-list';
 import { WordTableComponent } from './word-table/word-table';
 import { ExercisesComponent } from './exercises/exercises';
-import { UnitTwoLessonPageComponent } from './exercises/unit-two-lesson-page';
 import { ReviewOneComponent } from './exercises/review-one';
-
+import { LessonComponent } from './lessons/lesson-page';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'QuizFindDefinition', pathMatch: 'full' },
-  { path: 'quizFindDefinition', component: QuizFindDefinition },
-  { path: 'quizFindWord', component: QuizFindWord },
-  { path: 'listWord', component: WordListComponent },
-  { path: 'tableWord', component: WordTableComponent },
-  { path: 'exercises', component: ExercisesComponent },
-  { path: 'review/:reviewNumber', component: ReviewOneComponent },
-  { path: 'lessons/:unit/:category', component: UnitTwoLessonPageComponent },
-  { path: 'lessons/1', redirectTo: 'lessons/1/unit-overview', pathMatch: 'full' },
-  { path: 'lessons/2', redirectTo: 'lessons/2/thinking', pathMatch: 'full' },
-  { path: 'unit2-lesson', redirectTo: 'lessons/2/thinking', pathMatch: 'full' },
-  { path: 'unit2-lesson/:category', redirectTo: 'lessons/2/:category' },
+  { path: 'lesson/:lessonId', component: LessonComponent },
+  { path: 'quiz-definition/:lessonId', component: QuizFindDefinition },
+  { path: 'quiz-word/:lessonId', component: QuizFindWord },
+  { path: 'words-list/:lessonId', component: WordListComponent },
+  { path: 'words-table/:lessonId', component: WordTableComponent },
+  { path: 'exercises/:lessonId', component: ExercisesComponent },
 ];

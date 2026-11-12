@@ -1,234 +1,209 @@
-/* quiz.scss */
+/* quizFindDefinition.scss - Harmonisé avec exercises.scss */
+
+:host {
+  display: block;
+  color: #242a25;
+}
 
 /* Container général */
 .quiz-container {
-  width: 90%;
-  margin: 2rem auto;
-  padding: 0.1rem 1.5rem 1rem 1.5rem;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  background-color: #c5c9e9;
-  font-family: Arial, sans-serif;
+  max-width: 640px;
+  margin: 28px auto 64px;
+  padding: 24px;
+  border: 1px solid #9da99f;
+  border-radius: 4px;
+  background-color: #ffffff;
 }
 
 /* Mot à deviner */
 .word {
-  font-size: 1.8rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #242a25;
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 0 0 18px;
+  padding-bottom: 14px;
+  border-bottom: 3px solid #287747;
 }
 
 /* Exemple / indice */
 .example {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .example button {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: none;
-  background-color: #3498db;
-  color: white;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 4px;
+  border: 1px solid #9da99f;
+  background-color: #ffffff;
+  color: #27342b;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .example button:hover {
-  background-color: #0056b3;
+  background-color: #f0f5f1;
+  border-color: #287747;
 }
 
 .example p.hint {
-  margin-top: 0.5rem;
+  margin-top: 10px;
   font-style: italic;
-  color: #555;
-  padding: 0.5rem;
-  background-color: #eef60f;
-  border-radius: 6px;
+  color: #27342b;
+  padding: 10px 14px;
+  background-color: #f5f7f5;
+  border: 1px solid #d5ddd6;
+  border-left: 4px solid #287747;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 /* Choix multiples */
 .choices {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
+  gap: 10px;
+  margin-bottom: 18px;
 }
 
 .choices button {
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: rgb(223, 231, 231);
+  padding: 10px 14px;
+  border-radius: 4px;
+  border: 1px solid #9da99f;
+  background-color: #ffffff;
+  color: #27342b;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.4;
   cursor: pointer;
   text-align: left;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.choices button:hover {
-  background-color: #3498db;
+.choices button:hover:not(:disabled) {
+  background-color: #f0f5f1;
+  border-color: #287747;
 }
 
 /* États boutons */
 button.correct {
-  background-color: #28a745 !important;
-  color: white;
-  border-color: #28a745;
+  background-color: #e9f4eb !important;
+  color: #287747 !important;
+  border-color: #287747 !important;
+  font-weight: 650;
 }
 
 button.incorrect {
-  background-color: #dc3545 !important;
-  color: white;
-  border-color: #dc3545;
+  background-color: #fbefed !important;
+  color: #b63a35 !important;
+  border-color: #b63a35 !important;
+  font-weight: 650;
 }
 
 button.selected {
   border-width: 2px;
-  border-color: #007bff;
 }
 
 /* Feedback texte */
 .feedback {
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .feedback.correct {
-  color: #28a745;
+  color: #287747;
 }
 
 .feedback.incorrect {
-  color: #dc3545;
+  color: #b63a35;
 }
 
 /* Barre de progression */
 .progress-bar {
   width: 100%;
-  height: 12px;
-  background-color: #f3efef;
-  border-radius: 8px;
+  height: 10px;
+  background-color: #e8ece9;
+  border: 1px solid #d5ddd6;
+  border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-bar .progress {
   height: 100%;
-  background-color: #3498db;
+  background-color: #287747;
   transition: width 0.3s ease;
 }
 
 /* Fin du quiz */
 .quiz-end {
-  width: 100%;
-  margin: 2rem auto;
+  width: min(94%, 1780px);
+  margin: 28px auto 64px;
   text-align: center;
 }
 
+.quiz-end h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #242a25;
+}
+
 .quiz-end button {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  border: none;
-  background-color: #007bff;
-  color: white;
+  min-height: 38px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: 1px solid #287747;
+  background-color: #287747;
+  color: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .quiz-end button:hover {
-  background-color: #0056b3;
-}
-
-.input-container {
-  display: flex;
-  justify-content: center; /* centre horizontalement */
-  align-items: center;     /* centre verticalement si nécessaire */
-  gap: 10px;               /* espace entre input et bouton */
-  margin: 20px 0;          /* petit espace autour du bloc */
-}
-
-.input-container input {
-  padding: 8px 12px;
-  font-size: 16px;
-  width: 200px;            /* taille fixe ou adaptative */
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.input-container button {
-  padding: 8px 16px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: none;
-  background-color: #4caf50;
-  color: white;
-  cursor: pointer;
-}
-
-.input-container button:hover {
-  background-color: #45a049;
-}
-
-.results-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-
-  th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    vertical-align: top;
-  }
-}
-
-.result-cell {
-  font-weight: 600;
-}
-
-.result-cell.correct {
-  background: #d4edda; // vert clair
-  color: #155724;
-}
-
-.result-cell.incorrect {
-  background: #fff3cd; // jaune clair
-  color: #856404;
-}
-
-.sub {
-  color: #666;
-  font-size: 0.95em;
+  background-color: #1e6038;
 }
 
 /* Conteneur du tableau résultats */
 .results-table-container {
-  width: 95%;
-  margin: 20px auto 0;
-  background-color: #c5c9e9;
-  border-radius: 12px;
-  padding: 15px;
+  width: 100%;
+  margin: 24px auto 0;
+  padding: 0;
+  background-color: transparent;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-x: auto;
 }
 
 /* Tableau */
 .results-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   margin: 0;
-  border-radius: 8px;
-  overflow: hidden;
+  border: 1px solid #9da99f;
+  background-color: #ffffff;
+  text-align: left;
 }
 
 /* En-tête */
 .results-table th {
-  background-color: #4c4041;
-  color: white;
-  padding: 10px 12px;
+  background-color: #287747;
+  color: #ffffff;
+  padding: 12px 14px;
   text-align: left;
-  font-weight: bold;
-  border-right: 1px solid #5a5253;
+  font-size: 14px;
+  font-weight: 650;
+  border-right: 1px solid #1e6038;
+  border-bottom: 1px solid #1e6038;
 }
 
 .results-table th:last-child {
@@ -237,44 +212,63 @@ button.selected {
 
 /* Cellules */
 .results-table td {
-  padding: 8px 12px;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: white;
+  padding: 10px 14px;
+  border-right: 1px solid #edf0ed;
+  border-bottom: 1px solid #d5ddd6;
+  background-color: #ffffff;
+  font-size: 15px;
+  color: #242a25;
 }
 
 .results-table td:last-child {
   border-right: none;
 }
 
-/* Dernière ligne sans bordure basse */
 .results-table tr:last-child td {
   border-bottom: none;
 }
 
 /* Survol */
-.results-table tr:hover {
-  background-color: #f0f0f0;
+.results-table tbody tr:hover td {
+  background-color: #f0f5f1;
   cursor: default;
 }
 
-/* Style colonnes */
+/* Sous-texte */
 .sub {
-  color: #666;
-  font-size: 0.95em;
+  color: #59635b;
+  font-size: 13px;
 }
 
+/* Vert si bon, rouge doux si mauvais */
 .result-cell {
-  font-weight: 600;
+  font-weight: 650;
 }
 
-/* Vert si bon, jaune si mauvais */
 .result-cell.correct {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #e9f4eb !important;
+  color: #287747;
 }
 
 .result-cell.incorrect {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: #fbefed !important;
+  color: #b63a35;
+}
+
+/* Bonne réponse (colonne 3) */
+.good-answer {
+  font-weight: 650;
+  color: #27342b;
+}
+
+@media (max-width: 700px) {
+  .quiz-container {
+    width: calc(100% - 24px);
+    margin-top: 20px;
+    padding: 16px;
+  }
+
+  .word {
+    font-size: 24px;
+  }
 }

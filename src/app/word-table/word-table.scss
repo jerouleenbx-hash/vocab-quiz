@@ -1,32 +1,53 @@
-/* Conteneur du tableau (même largeur que le header) */
-.word-table-container {
-  width: 95%; /* Même largeur que .menu-container */
-  margin: 20px auto 0; /* Marge supérieure pour l'espacement */
-  background-color: #c5c9e9;
-  border-radius: 12px;
-  padding: 15px;
-  box-sizing: border-box;
-  overflow: hidden;
+:host {
+  display: block;
+  color: #242a25;
 }
 
-/* Tableau (largeur 100% du conteneur) */
+/* Conteneur du tableau aligné sur .exercise-page */
+.word-table-container {
+  width: min(94%, 1780px);
+  margin: 28px auto 64px;
+  padding: 0 0 30px;
+  background-color: transparent;
+  box-sizing: border-box;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/* Titre d'en-tête optionnel (ex: Unit 02) */
+.word-table-container h2 {
+  margin: 0 0 24px;
+  padding: 0 4px 16px;
+  border-bottom: 3px solid #287747;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #242a25;
+}
+
+/* Tableau */
 .word-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   margin: 0;
-  border-radius: 8px;
-  overflow: hidden;
+  border: 1px solid #9da99f;
+  background-color: #ffffff;
 }
 
-/* En-tête du tableau */
+/* En-tête du tableau (vert principal #287747 comme .section-letter et .action-button.primary) */
 .word-table th {
-  background-color: #4c4041;
-  color: white;
-  padding: 10px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #287747;
+  color: #ffffff;
+  padding: 12px 14px;
   text-align: left;
-  font-weight: bold;
-  border-right: 1px solid #5a5253;
+  font-size: 14px;
+  font-weight: 650;
+  border-right: 1px solid #1e6038;
+  border-bottom: 1px solid #1e6038;
 }
 
 .word-table th:last-child {
@@ -45,96 +66,111 @@
 }
 
 .sort-button:focus-visible {
-  outline: 2px solid white;
+  outline: 2px solid #ffffff;
   outline-offset: 3px;
 }
 
 /* Cellules du tableau */
 .word-table td {
-  padding: 8px 12px;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: white;
+  padding: 10px 14px;
+  border-right: 1px solid #edf0ed;
+  border-bottom: 1px solid #d5ddd6;
+  background-color: #ffffff;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #242a25;
+  transition: background-color 0.15s ease;
 }
 
 .word-table td:last-child {
   border-right: none;
 }
 
-/* Dernière ligne sans bordure basse */
 .word-table tr:last-child td {
   border-bottom: none;
 }
 
-/* Survol des lignes */
-.word-table tr:hover {
-  background-color: #f0f0f0;
+/* Survol des lignes (important : cibler td car background-color est sur td) */
+.word-table tbody tr:hover td {
+  background-color: #f0f5f1;
   cursor: pointer;
 }
 
 /* Ligne révélée */
-.word-table tr.revealed {
-  background-color: #e9f7fe;
+.word-table tbody tr.revealed td {
+  background-color: #e9f4eb;
+  border-bottom-color: #9da99f;
 }
 
-/* Pagination (même largeur que le tableau) */
-.pagination {
-  width: 90%; /* Même largeur que le tableau et le header */
-  margin: 10px auto 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
-
-/* Boutons de pagination */
-.pagination button {
-  height: 36px;
-  min-width: 100px;
-  padding: 0 14px;
-  background-color: rgb(190, 186, 186);
-  color: #4c4041;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.pagination button:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
-}
-
-.pagination span {
-  font-weight: bold;
-  color: #4c4041;
-}
-
+/* Titre du mot et pastille de score */
 .word-title-container {
-  display: flex;          /* Active le mode flexbox */
-  align-items: center;   /* Aligne verticalement au centre */
-  gap: 8px;              /* Espace entre le texte et le dot */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 650;
+  color: #27342b;
 }
 
 .score-dot {
   width: 12px;
   height: 12px;
-  border-radius: 50%;    /* Pour un cercle */
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(36, 42, 37, 0.2);
 }
 
-.word-table-container{
-  width: 95%;
-  margin: 20px auto 0;
-  background-color: #c5c9e9;
-  border-radius: 12px;
-  padding: 15px;
-  box-sizing: border-box;
+/* Pagination harmonisée avec .action-button */
+.pagination {
+  width: min(94%, 1780px);
+  margin: 16px auto 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
 
+.pagination button {
+  min-height: 36px;
+  min-width: 100px;
+  padding: 0 14px;
+  background-color: #ffffff;
+  color: #27342b;
+  border: 1px solid #9da99f;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
 
-  /* ascenseur */
-  max-height: 85vh;     /* ajuste */
-  overflow-y: auto;
-  overflow-x: hidden;
+.pagination button:hover:not(:disabled) {
+  background-color: #f0f5f1;
+  border-color: #287747;
+}
 
+.pagination button:disabled {
+  border-color: #c5ccc6;
+  background-color: #e8ece9;
+  color: #8a938c;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  font-weight: 650;
+  color: #287747;
+}
+
+@media (max-width: 700px) {
+  .word-table-container {
+    width: calc(100% - 24px);
+    margin-top: 20px;
+  }
+
+  .word-table th,
+  .word-table td {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
 }

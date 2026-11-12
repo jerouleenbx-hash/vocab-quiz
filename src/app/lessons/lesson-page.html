@@ -1,0 +1,33 @@
+<main class="lesson-page">
+  <div class="carousel-container">
+ 
+  <nav class="exercise-navigation" aria-label="Navigation entre les exercices">
+    <button
+      type="button"
+      class="navigation-arrow"
+      aria-label="Exercice précédent"
+      title="Exercice précédent"
+      [disabled]="currentIndex === 0"
+      (click)="prevImage()">←</button>
+    <span>Lesson {{lessonId}} </span>
+    <button
+      type="button"
+      class="navigation-arrow"
+      aria-label="Exercice suivant"
+      title="Exercice suivant"
+      [disabled]="currentIndex === lessons.length - 1"
+      (click)="nextImage()">→</button>
+  </nav>
+
+  <!-- Affichage de l'image active uniquement -->
+  <div class="html-wrapper">
+    <iframe 
+      [src]="currentLessonUrl" 
+      style="width: 100%; height: 1500px; border: none; display: block;"
+      [title]="'Page ' + (currentIndex + 1)">
+    </iframe>
+  </div>
+  
+
+  </div>
+</main>

@@ -1,0 +1,26 @@
+<div class="unit-navigation">
+
+  <div class="lessons-numbers">
+  @for (lesson of lessons; track lesson) {
+    <button 
+      type="button"
+      (click)="navService.setLesson(lesson)"
+      [class.active]="navService.currentLesson() === lesson">
+      {{ lesson }}
+    </button>
+  }
+</div>
+
+<nav class="rubriques">
+  @for (rubrique of rubriques; track rubrique.path) {
+    <button 
+      type="button"
+      (click)="navService.setRubrique(rubrique.path)"
+      [class.active]="navService.currentRubrique() === rubrique.path">
+      {{ rubrique.label }}
+    </button>
+  }
+</nav>
+
+
+</div>

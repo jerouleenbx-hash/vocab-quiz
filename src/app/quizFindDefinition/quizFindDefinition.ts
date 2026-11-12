@@ -3,6 +3,7 @@ import { QuizService, MultipleChoiceWord } from '../services/quiz.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../services/global.service';
+import { NavigationService } from '../services/navigation.service';
 
 type QuizResult = {
   questionId: number;
@@ -30,29 +31,46 @@ export class QuizFindDefinition implements OnInit {
   results = signal<QuizResult[]>([]);
   totalQuestions = 8;
   currentIndex = signal<number>(0);
-  difficulty: string = 'A1';
-  tag: string = "Basic words";
+  tag: string = 'Unit 02';
   userId: number = 1; // À adapter selon ton système d'authentification
 
   constructor(
     private quizService: QuizService,
     private globalService: GlobalService,
+    private navService: NavigationService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.difficulty = this.globalService.currentLevel;
-    this.tag = this.globalService.currentTag;
-    this.restartQuiz();
+    this.route.paramMap.subscribe(params => {
+      const lessonId = params.get('lessonId') || '1';
+      
+      // Synchronisation de la barre de navigation globale
+      const numericId = Number(lessonId);
+      if (!isNaN(numericId)) {
+        this.navService.currentLesson.set(numericId);
+      }
+      this.navService.currentRubrique.set('quiz-definition');
+
+      // Conversion en "Unit XX" et relance du quiz
+      this.tag = this.getUnitTag(lessonId);
+      this.restartQuiz();
+    });
+  }
+
+  getUnitTag(lessonId: number | string): string {
+    const num = Number(lessonId) || 1;
+    // Arrondit au nombre pair supérieur (1->2, 2->2, 3->4, 4->4... 25->26, 26->26)
+    const unitNumber = Math.ceil(num / 2) * 2;
+    
+    // Ajoute un '0' devant si le nombre a moins de 2 chiffres (ex: 2 -> "02")
+    return `Unit ${unitNumber.toString().padStart(2, '0')}`;
   }
 
   loadQuestions() {
     this.quizService.getQuizDefinition(
-      this.difficulty,
       this.tag,
-      this.userId,
-      this.globalService.currentCategory,
-      this.globalService.currentType
+      this.userId
     ).subscribe({
       next: (qs) => {
         this.questions.set(qs);
@@ -64,7 +82,6 @@ export class QuizFindDefinition implements OnInit {
   }
 
   loadCurrentQuestion() {
-    
     if (this.currentIndex() >= this.totalQuestions) {
       this.currentQuestion.set(null); // quiz terminé
       return;
@@ -91,24 +108,24 @@ export class QuizFindDefinition implements OnInit {
       this.correctAnswerToShow.set(q.definition);
     }
 
-this.results.update(list => [
-  ...list,
-  {
-    questionId: q.id,
-    word: q.word,
-    difficulty: q.difficulty,
-    userAnswer: choice,
-    correctAnswer: q.definition,
-    correct
-  }
-]);
+    this.results.update(list => [
+      ...list,
+      {
+        questionId: q.id,
+        word: q.word,
+        difficulty: q.difficulty,
+        userAnswer: choice,
+        correctAnswer: q.definition,
+        correct
+      }
+    ]);
 
     this.quizService.sendAnswer(q.id, correct ? this.showHint() ? 1 : 2 : -1).subscribe();
 
     const delay = correct ? 1000 : 2000;
 
     setTimeout(() => {
-      this.currentIndex.set(this.currentIndex()+1);
+      this.currentIndex.set(this.currentIndex() + 1);
       this.loadCurrentQuestion();
     }, delay);
   }
@@ -124,9 +141,9 @@ this.results.update(list => [
     return Math.round(((this.currentIndex()) / this.totalQuestions) * 100);
   }
 
-restartQuiz() {
-  this.score.set(0);
-  this.results.set([]);
-  this.loadQuestions();
-}
+  restartQuiz() {
+    this.score.set(0);
+    this.results.set([]);
+    this.loadQuestions();
+  }
 }

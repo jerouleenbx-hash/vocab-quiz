@@ -4,7 +4,7 @@
     <tr>
       <th [attr.aria-sort]="sortColumn === 'word' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'">
         <button class="sort-button" type="button" (click)="toggleSort('word')">
-          Word (level)<span aria-hidden="true">{{ sortColumn === 'word' ? (sortDirection === 'asc' ? ' ▲' : ' ▼') : '' }}</span>
+          Word <span aria-hidden="true">{{ sortColumn === 'word' ? (sortDirection === 'asc' ? ' ▲' : ' ▼') : '' }}</span>
         </button>
       </th>
       <th [attr.aria-sort]="sortColumn === 'definition' ? (sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'">

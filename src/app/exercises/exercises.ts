@@ -2,15 +2,22 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { extraExerciseSections } from './exercise-extra-sections';
-import { unitTwoExerciseSections } from './unit-two-exercises';
-import { unitThreeExerciseSections, unitFourExerciseSections } from './unit-three-four-exercises';
-import { unitFiveExerciseSections, unitSixExerciseSections, unitSevenExerciseSections, unitEightExerciseSections } from './unit-five-eight-exercises';
-import { unitNineExerciseSections, unitTenExerciseSections, unitElevenExerciseSections, unitTwelveExerciseSections } from './unit-five-eight-exercises';
-import { unitThirteenExerciseSections, unitFourteenExerciseSections, unitFifteenExerciseSections, unitSixteenExerciseSections } from './unit-five-eight-exercises';
-import { unitSeventeenExerciseSections, unitEighteenExerciseSections, unitNineteenExerciseSections, unitTwentyExerciseSections } from './unit-five-eight-exercises';
-import { unitTwentyOneExerciseSections, unitTwentyTwoExerciseSections, unitTwentyThreeExerciseSections, unitTwentyFourExerciseSections } from './unit-five-eight-exercises';
-import { unitTwentyFiveExerciseSections, unitTwentySixExerciseSections } from './unit-five-eight-exercises';
+import { NavigationService } from '../services/navigation.service'; // Ajustez le chemin si besoin
+import { unitOneExerciseSections, unitTwoExerciseSections } from './unit-1-2-exercises';
+import { unitThreeExerciseSections, unitFourExerciseSections } from './unit-3-4-exercises';
+import { unitFiveExerciseSections, unitSixExerciseSections } from './unit-5-6-exercises';
+import {  unitSevenExerciseSections, unitEightExerciseSections } from './unit-7-8-exercises';
+import { unitNineExerciseSections, unitTenExerciseSections  } from './unit-9-10-exercises';
+import { unitElevenExerciseSections, unitTwelveExerciseSections } from './unit-11-12-exercises';
+import { unitThirteenExerciseSections, unitFourteenExerciseSections } from './unit-13-14-exercises';
+import { unitFifteenExerciseSections, unitSixteenExerciseSections } from './unit-15-16-exercises';
+import { unitSeventeenExerciseSections, unitEighteenExerciseSections  } from './unit-17-18-exercises';
+import { unitNineteenExerciseSections, unitTwentyExerciseSections } from './unit-19-20-exercises';
+import { unitTwentyOneExerciseSections, unitTwentyTwoExerciseSections } from './unit-21-22-exercises';
+import { unitTwentyThreeExerciseSections, unitTwentyFourExerciseSections } from './unit-23-24-exercises';
+import { unitTwentyFiveExerciseSections, unitTwentySixExerciseSections } from './unit-25-26-exercises';
 
 export type SectionId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O';
 export type UnitId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
@@ -50,55 +57,8 @@ export class ExercisesComponent {
   currentUnit: UnitId = 1;
   currentSectionIndex = 0;
 
-  readonly unit1Sections: ExerciseSection[] = [
-    {
-      id: 'A',
-      title: 'Present simple or present continuous',
-      instruction: 'Write the verb in brackets in the correct form in each gap.',
-      questions: [
-        { number: 1, parts: ['My brother ', ' (do) a degree at university so I ', ' (see) him very often, unfortunately.'], answers: [['is doing'], ["don't see"]] },
-        { number: 2, parts: ['Darren ', ' usually ', ' (get) home until about eight o’clock.'], answers: [["doesn't"], ['get']] },
-        { number: 3, parts: ["I'm sorry to hear that your parents ", ' (get) divorced.'], answers: [['are getting']] },
-        { number: 4, parts: ['You ', ' (go) to the end of the street and ', ' (turn) right.'], answers: [['go'], ['turn']] },
-        { number: 5, parts: ['Why ', ' ice ', ' (float)?'], answers: [['does'], ['float']] },
-        { number: 6, parts: ["It's lovely now the evenings ", ' (get) longer, isn’t it?'], answers: [['are getting']] },
-        { number: 7, parts: ['My dad ', ' (eat) meat at all – he’s a vegetarian.'], answers: [["doesn't eat"]] },
-        { number: 8, parts: ['Actually, we ', ' (listen) to The Libertines at all – this is Pete Docherty’s second band, Babyshambles.'], answers: [["aren't listening"]] },
-        { number: 9, parts: ['A man ', ' (walk) into a bar. Ouch! Not a good idea to walk into an iron bar!'], answers: [['walks']] },
-        { number: 10, parts: ['', ' you ', ' (phone) me from your mobile? The line’s not very good.'], answers: [['Are', 'are'], ['phoning']] },
-        { number: 11, parts: ['', ' you often ', ' (order) things online?'], answers: [['Do', 'do'], ['order']] },
-        { number: 12, parts: ["There’s an Englishman, an Irishman and a Scotsman. They ", ' (walk) across the desert when one of them ', ' (spot) a camel in the distance ...'], answers: [['are walking'], ['spots']] },
-        { number: 13, parts: ['Beckham ', ' (have) control of the ball ... It’s Beckham ... And he ', ' (score)!'], answers: [['has'], ['scores']] },
-        { number: 14, parts: ['WOMAN ', ' (€500 MILLION LOTTERY WIN TO CHARITY'], answers: [['GIVES']] },
-        { number: 15, parts: ['My dad ', ' (always / tell) jokes! They’re usually rubbish, though.'], answers: [['is always telling']] },
-        { number: 16, parts: ['‘Phil ', ' (wear) ties, does he?’ ‘Actually, he ', ' a tie to work most days.’'], answers: [["doesn't wear"], ['does wear', 'wears']] }
-      ]
-    },
-    {
-      id: 'B',
-      title: 'One word in each gap',
-      instruction: 'Write one word in each gap.',
-      questions: [
-        { number: 1, parts: ['Why do you ', ' leave the light on when you go out of the room? You wait till you start paying the electricity bill!'], answers: [['always']] },
-        { number: 2, parts: ['Fifteen teachers are teaching here full-time at ', '.'], answers: [['present']] },
-        { number: 3, parts: ["My sister’s revising for her GCSEs at the ", '.'], answers: [['moment']] },
-        { number: 4, parts: ["I’m quite happy living at home for the time ", ', but I guess I’ll have to get my own place eventually.'], answers: [['being']] },
-        { number: 5, parts: ['It’s true that Ralph calls us quite ', ', but most students only call their parents when they need something, don’t they?'], answers: [['rarely']] },
-        { number: 6, parts: ['We go to the cinema ', ' now and then, but only if there’s something good on.'], answers: [['every']] },
-        { number: 7, parts: ['I’m alone in my study bedroom reading ', ' of the time.'], answers: [['most', 'much', 'some']] },
-        { number: 8, parts: ['Tim ', ' goes out to play until he’s done all his homework. I just don’t allow it!'], answers: [['never']] },
-        { number: 9, parts: ['I see Lucinda from ', ' to time, but not on a regular basis.'], answers: [['time']] },
-        { number: 10, parts: ['I’m sitting in the garden ', ' now talking to you on my mobile.'], answers: [['right']] },
-        { number: 11, parts: ['That’s the last ', ' we’re inviting Dave to one of our parties!'], answers: [['time']] },
-        { number: 12, parts: ['Do young people these ', ' have more free time than they did in the past?'], answers: [['days']] },
-        { number: 13, parts: ['My mum fills up with petrol ', ' she goes to the supermarket.'], answers: [['whenever', 'when', 'if']] },
-        { number: 14, parts: ['I’m staying in ', ' now, but I might go out a bit later on.'], answers: [['for']] },
-        { number: 15, parts: ['', ' is the last time I ever order from that pizzeria. It was disgusting!'], answers: [['It', 'That']] }
-      ]
-    },
-    ...extraExerciseSections
-  ];
 
+  readonly unit1Sections = unitOneExerciseSections;
   readonly unit2Sections = unitTwoExerciseSections;
   readonly unit3Sections = unitThreeExerciseSections;
   readonly unit4Sections = unitFourExerciseSections;
@@ -352,8 +312,9 @@ export class ExercisesComponent {
   }
 
   get currentLessonLink(): string[] {
-    return ['/lessons', String(this.currentUnit), this.currentLessonCategory];
+    return ['/lesson', String(this.currentUnit)];
   }
+
 
   get reviewLink(): string[] {
     return ['/review', String(Math.ceil(this.currentUnit / 2))];
@@ -363,13 +324,27 @@ export class ExercisesComponent {
   checkedSections: Record<string, boolean> = {};
   visibleCorrections: Record<string, boolean> = {};
 
-  constructor(route: ActivatedRoute) {
-    route.queryParamMap.subscribe(params => {
-      const requestedUnit = params.get('unit');
-      const requestedSection = params.get('section') as SectionId | null;
-      if (!['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15','16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26'].includes(requestedUnit ?? '')) return;
+  constructor(
+    private route: ActivatedRoute,
+    private navService: NavigationService
+  ) {
+    // On écoute à la fois le paramètre de route (:lessonId) et les éventuels queryParams (?section=A)
+    combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(([params, queryParams]) => {
+      const lessonIdParam = params.get('lessonId');
+      const requestedSection = queryParams.get('section') as SectionId | null;
 
-      this.currentUnit = Number(requestedUnit) as UnitId;
+      const numericUnit = Number(lessonIdParam);
+      if (!isNaN(numericUnit) && numericUnit >= 1 && numericUnit <= 26) {
+        this.currentUnit = numericUnit as UnitId;
+      } else {
+        this.currentUnit = 1;
+      }
+
+      // Synchronisation avec la barre de navigation globale
+      this.navService.currentLesson.set(this.currentUnit);
+      this.navService.currentRubrique.set('exercises');
+
+      // Sélection de la section (A par défaut, ou celle demandée dans ?section=...)
       const sectionIndex = requestedSection
         ? this.sections.findIndex(section => section.id === requestedSection)
         : 0;
@@ -377,10 +352,11 @@ export class ExercisesComponent {
     });
   }
 
+
   selectUnit(unit: UnitId) {
     if (this.currentUnit === unit) return;
-    this.currentUnit = unit;
-    this.currentSectionIndex = 0;
+    // Passe par le NavigationService pour mettre à jour l'URL (/exercises/X) et l'état global
+    this.navService.setLesson(unit);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

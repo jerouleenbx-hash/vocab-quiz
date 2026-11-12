@@ -6,17 +6,11 @@ export class GlobalService {
 
   private _tag$ = new BehaviorSubject<string>('Basic words');
   private _category$ = new BehaviorSubject<string>('BASIC WORDS');
-  private _level$ = new BehaviorSubject<string>('A1');
   private _type$ = new BehaviorSubject<string>('All');
 
   // ✅ Getter pour récupérer l'observable
   get tag$(): Observable<string> {
     return this._tag$.asObservable();
-  }
-
-  // ✅ Getter pour récupérer l'observable
-  get level$(): Observable<string> {
-    return this._level$.asObservable();
   }
 
   get type$(): Observable<string> {
@@ -33,11 +27,6 @@ export class GlobalService {
     this._category$.next(category);
   }
 
-  // ✅ Setter pour changer le level
-  setLevel(level: string) {
-    this._level$.next(level);
-  }
-
   setType(type: string) {
     this._type$.next(type);
   }
@@ -51,11 +40,6 @@ export class GlobalService {
   // Optionnel : récupérer directement la valeur actuelle
   get currentTag(): string {
     return this._tag$.getValue();
-  }
-
-  // Optionnel : récupérer directement la valeur actuelle
-  get currentLevel(): string {
-    return this._level$.getValue();
   }
 
   get currentType(): string {

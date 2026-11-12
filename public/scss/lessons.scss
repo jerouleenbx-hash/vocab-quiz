@@ -1,0 +1,538 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    background-color: #f4f4f4;
+    padding: 20px;
+    line-height: 1.4;
+    font-size: 13.5px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1.5px solid var(--primary-green);
+    padding-bottom: 6px;
+    margin-bottom: 18px;
+    gap: 8px;
+}
+
+.header-title {
+    color: var(--primary-green);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.unit-badge {
+    background-color: var(--primary-green);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.section-banner {
+    background-color: var(--primary-green);
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 5px 5px 0 0;
+    margin-top: 16px;
+}
+
+.grammar-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1.5px solid var(--primary-green);
+    margin-bottom: 10px;
+}
+
+.grammar-table td {
+    padding: 6px 12px;
+    vertical-align: top;
+}
+
+.grammar-table td.left-col {
+    width: 38%;
+    border-right: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+.grammar-table td.right-col {
+    width: 62%;
+}
+
+.grammar-table tr.sub-header td {
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-dark);
+    padding: 8px 12px;
+}
+
+.phrases-box {
+    border: 1.5px solid var(--primary-green);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    background-color: #ffffff;
+}
+
+.phrases-box-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.phrases-list {
+    font-style: italic;
+}
+
+.phrases-list span.slash {
+    font-style: normal;
+    color: var(--primary-green);
+    font-weight: bold;
+    margin: 0 3px;
+}
+
+.us-uk-section {
+    margin: 12px 0 16px 0;
+    padding: 4px 6px;
+}
+
+.us-uk-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.us-uk-list {
+    list-style: none;
+    padding-left: 14px;
+}
+
+.us-uk-list li {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.us-uk-list li::before {
+    content: "•";
+    color: var(--primary-green);
+    font-weight: bold;
+    position: absolute;
+    left: -14px;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 16px;
+    margin-top: 3px;
+}
+
+.watch-out-box {
+    display: flex;
+    border: 1.5px solid var(--primary-green);
+    border-radius: 5px;
+    background-color: var(--light-green-bg);
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+.watch-out-label {
+    background-color: var(--primary-green);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    padding: 8px 5px;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.watch-out-content {
+    padding: 8px 14px;
+    flex-grow: 1;
+}
+
+.watch-out-content ul {
+    list-style: none;
+    padding-left: 14px;
+}
+
+.watch-out-content li {
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.watch-out-content li:last-child {
+    margin-bottom: 0;
+}
+
+.watch-out-content li::before {
+    content: "•";
+    color: var(--primary-green);
+    font-weight: bold;
+    position: absolute;
+    left: -14px;
+}
+
+.check {
+    color: var(--primary-green);
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.inline-examples {
+    display: flex;
+    gap: 16px;
+    margin-top: 2px;
+}
+
+.page-footer {
+    text-align: right;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 18px;
+}
+
+
+:root {
+    --primary-green: #5ca632;
+    --light-green-bg: #eef5e9;
+    --border-color: #9dc484;
+    --text-dark: #222222;
+    --text-muted: #444444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    background-color: #f4f4f4;
+    padding: 20px;
+    line-height: 1.35;
+    font-size: 12.5px;
+}
+
+.page-container {
+    width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 35px 45px 45px 45px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Banners */
+.section-banner {
+    display: inline-block;
+    background-color: var(--primary-green);
+    color: #ffffff;
+    font-size: 15.5px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 5px 5px 0 0;
+    margin-top: 14px;
+}
+
+/* Phrases, patterns and collocations */
+.collocations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1.5px solid var(--primary-green);
+}
+
+.collocations-col {
+    padding: 8px 12px;
+}
+
+.collocations-col:first-child {
+    border-right: 1px solid var(--border-color);
+}
+
+.collocation-item {
+    margin-bottom: 6px;
+    padding-left: 12px;
+    text-indent: -12px;
+}
+
+.collocation-item:last-child {
+    margin-bottom: 0;
+}
+
+.collocation-item strong {
+    margin-right: 4px;
+}
+
+/* Idioms */
+.idioms-box {
+    border: 1.5px solid var(--primary-green);
+    padding: 8px 12px;
+}
+
+.idiom-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.idiom-row:last-child {
+    margin-bottom: 0;
+}
+
+.idiom-term {
+    width: 28%;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.idiom-def {
+    width: 72%;
+}
+
+/* Word formation */
+.word-formation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1.5px solid var(--primary-green);
+}
+
+.wf-col {
+    padding: 8px 12px;
+}
+
+.wf-col:first-child {
+    border-right: 1px solid var(--border-color);
+}
+
+.wf-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.wf-row:last-child {
+    margin-bottom: 0;
+}
+
+.wf-root {
+    width: 24%;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.wf-derivatives {
+    width: 76%;
+}
+
+.page-footer {
+    text-align: right;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 16px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    background-color: #f4f4f4;
+    padding: 20px;
+    line-height: 1.35;
+    font-size: 12.5px;
+}
+
+/* En-tête d'unité */
+.unit-hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.unit-number-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.unit-tag {
+    background-color: var(--primary-green);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 2px 8px;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+}
+
+.unit-digit {
+    font-size: 62px;
+    font-weight: 800;
+    color: var(--primary-green);
+    line-height: 0.85;
+}
+
+.unit-title-group {
+    flex-grow: 1;
+}
+
+.unit-main-banner {
+    background-color: var(--primary-green);
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 6px 14px;
+}
+
+.unit-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-top: 6px;
+    padding-left: 14px;
+}
+
+.unit-subtitle::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-green);
+}
+
+/* En-têtes de section */
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 16px;
+}
+
+.section-banner {
+    background-color: var(--primary-green);
+    color: #ffffff;
+    font-size: 15.5px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 5px 5px 0 0;
+}
+
+.section-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    padding-bottom: 3px;
+}
+
+/* Tableaux Topic Vocabulary (4 colonnes) */
+.vocab-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1.5px solid var(--primary-green);
+    background-color: var(--light-green-bg);
+    table-layout: fixed;
+}
+
+.vocab-table td {
+    width: 25%;
+    padding: 3px 10px;
+    border-right: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.vocab-table td:last-child {
+    border-right: none;
+}
+
+.vocab-table tr:first-child td {
+    padding-top: 8px;
+}
+
+.vocab-table tr:last-child td {
+    padding-bottom: 8px;
+}
+
+/* Tableau Phrasal Verbs (Présentation structurée) */
+.phrasal-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1.5px solid var(--primary-green);
+}
+
+.phrasal-table td {
+    padding: 5px 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #e6efe0;
+}
+
+.phrasal-table tr:last-child td {
+    border-bottom: none;
+}
+
+.phrasal-table td.pv-term {
+    width: 17%;
+    font-weight: 700;
+    color: var(--text-dark);
+    background-color: #f9fcf7;
+}
+
+.phrasal-table td.pv-def {
+    width: 33%;
+    color: var(--text-dark);
+}
+
+.phrasal-table td.pv-divider {
+    border-right: 1.5px solid var(--border-color);
+}
+
+/* Phrases, patterns and collocations */
+.collocations-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1.5px solid var(--primary-green);
+    table-layout: fixed;
+}
+
+.collocations-table td {
+    width: 50%;
+    padding: 8px 12px;
+    vertical-align: top;
+}
+
+.collocations-table td:first-child {
+    border-right: 1px solid var(--border-color);
+}
+
+.collocation-item {
+    margin-bottom: 7px;
+    padding-left: 12px;
+    text-indent: -12px;
+}
+
+.collocation-item:last-child {
+    margin-bottom: 0;
+}
+
+.collocation-item strong {
+    margin-right: 4px;
+}
+
+.page-footer {
+    text-align: left;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 18px;
+}

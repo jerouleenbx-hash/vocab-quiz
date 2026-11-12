@@ -17,7 +17,6 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./header.scss'],
 })
 export class Header implements OnInit {
-  levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'All'];
 
   wordButtonColors = ['#a3d8f4', '#7cc1ea', '#56a9e0', '#3392d5', '#1c78bf', '#105ea5', '#0a4680'];
 
@@ -27,7 +26,6 @@ export class Header implements OnInit {
   selectedCategory: string = "Destination C1-C2";
   selectedTag: string = "Unit 02";
   selectedType: string = 'All';
-  selectedLevel: string = "All"; // par défaut, ou le premier level
   selectedAction: 'table' | 'list' | 'quizDef' | 'quizWord' | 'exercises' = 'list'; // action sélectionnée par défaut
 
   showPopup: boolean = false;
@@ -64,7 +62,6 @@ ngOnInit() {
     this.selectedTag = defaultTagExists ? this.selectedTag : 'All';
 
     this.globalService.setTag(this.selectedTag);
-    this.changeLevel('All'); // optionnel, si tu veux garantir le niveau
 
     if (this.router.url.startsWith('/exercises') || this.router.url.startsWith('/lessons') || this.router.url.startsWith('/review') || this.router.url.startsWith('/unit2-lesson')) {
       this.selectedAction = 'exercises';
@@ -74,14 +71,6 @@ ngOnInit() {
   });
 }
 
-
-  goToDefLevel(level: string) {
-    // navigation programmatique
-  }
-
-  goToWordLevel(level: string) {
-    // navigation programmatique
-  }
 
   goToQuizDefinition() {
       this.selectedAction = 'quizDef';
@@ -102,7 +91,7 @@ ngOnInit() {
       this.globalService.setTag(this.selectedTag);
       this.selectedAction = 'list';
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/listWord']);
+      this.router.navigate(['/lesson1']);
       this.cdr.detectChanges(); // Force la détection de changement
     });
   }
@@ -122,15 +111,9 @@ ngOnInit() {
     this.router.navigate(['/exercises']);
   }
 
-  changeLevel(level: string) {
-    this.globalService.setLevel(level);
-    this.selectedLevel = level;       // mémoriser le level choisi
-  }
-
   onTagChangeFromEvent(event: Event) {
     const select = event.target as HTMLSelectElement | null;
     if (select?.value) {
-      this.changeLevel('All');
       this.globalService.setTag(select.value);
       this.selectedTag = select.value;
       this.goToList();
@@ -142,7 +125,6 @@ ngOnInit() {
   onCategoryChangeFromEvent(event: Event) {
     const select = event.target as HTMLSelectElement | null;
     if (select?.value) {
-      this.changeLevel('All');
       this.globalService.setCategory(select.value);
       this.selectedCategory = select.value;
       this.selectedTag = 'All';

@@ -41,24 +41,46 @@
   font-weight: 650;
   text-decoration: none;
 }
-
 .unit-navigation {
-  display: inline-flex;
+  display: flex;            /* CHANGÉ : inline-flex devient flex pour occuper toute la largeur */
+  justify-content: center;  /* AJOUTÉ : Centre les numéros horizontalement */
+  flex-wrap: wrap;          /* AJOUTÉ : Permet de passer à la ligne proprement sur petit écran */
+  gap: 6px;                 /* AJOUTÉ : Crée un espace uniforme de 6px entre chaque numéro */
+  margin: 0 0 8px;          /* Ajuste la marge du bas */
+  border: none;             /* CHANGÉ : Supprime la bordure globale du bloc */
+  overflow: visible;        /* CHANGÉ : Permet de voir les bordures individuelles */
+  gap: 16px 32px; 
   margin: 0 0 16px;
-  border: 1px solid #9da99f;
-  border-radius: 4px;
-  overflow: hidden;
 }
 
 .unit-navigation button {
-  min-height: 36px;
-  padding: 0 16px;
-  border: 0;
+  min-height: unset;
+  height: 32px;             /* MODIFIÉ : Passe de 24px à 32px pour plus de hauteur */
+  min-width: 32px;          /* AJOUTÉ : Assure que les boutons simples (ex: "1") restent bien carrés */
+  padding: 0 12px;          /* MODIFIÉ : Donne plus d'air sur les côtés pour les nombres à deux chiffres */
+  border: 1px solid #9da99f;
+  border-radius: 4px;       
   background: #fff;
   color: #27342b;
   font: inherit;
+  font-size: 14px;          /* MODIFIÉ : Augmente la taille du texte (de 12px à 14px) */
+  font-weight: 600;         /* AJOUTÉ : Met le texte un peu plus épais pour une meilleure lisibilité */
+  line-height: 1;      
   cursor: pointer;
+  display: inline-flex;     /* AJOUTÉ : Idéal pour centrer parfaitement le texte à l'intérieur */
+  align-items: center;      /* AJOUTÉ : Centre verticalement */
+  justify-content: center;   /* AJOUTÉ : Centre horizontalement */
+  transition: all 0.2s ease;
 }
+
+
+
+.unit-navigation button.active {
+  background: #287747;
+  color: #fff;
+  border-color: #287747;    /* Aligne la bordure avec la couleur active */
+}
+
 
 .unit-navigation button + button {
   border-left: 1px solid #9da99f;
@@ -106,8 +128,7 @@
 }
 
 .exercise-section {
-  padding: 24px 4px 26px;
-  border-bottom: 1px solid #d5ddd6;
+  padding: 4px 1px 4px 1px;
 }
 
 .section-heading {

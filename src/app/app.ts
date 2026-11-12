@@ -1,11 +1,12 @@
 import { ApplicationConfig, Component, NgModule } from '@angular/core';
 import { provideRouter, RouterOutlet, withRouterConfig } from '@angular/router';
 import { Header } from "./header/header";
+import { Navigation } from "./header/navigation";
 import { routes } from './app.routes';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header],
+  imports: [RouterOutlet, Header, Navigation],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

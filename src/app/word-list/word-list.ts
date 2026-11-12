@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, of, combineLatest, BehaviorSubject } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router'; // 1. Import de ActivatedRoute
+import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
+import { switchMap, map, tap } from 'rxjs/operators';
 import { WordService } from '../services/word.service';
 import { GlobalService } from '../services/global.service';
+import { NavigationService } from '../services/navigation.service';
 import { SimpleWord } from '../models/interfaces';
 
 @Component({
@@ -24,20 +26,41 @@ export class WordListComponent {
   totalPages$: Observable<number>;
 
   revealed = new Set<number>();
+  unitTag$: Observable<string>;
 
   constructor(
+    private route: ActivatedRoute, // 2. Injection dans le constructor
+    private navService: NavigationService,
     private wordService: WordService,
     private globalService: GlobalService
   ) {
 
+    // 3. Récupération du paramètre 'lessonId' depuis l'URL et conversion en "Unit XX"
+    this.unitTag$ = this.route.paramMap.pipe(
+      map(params => params.get('lessonId') || '1'),
+      tap(lessonId => {
+        // Synchronisation de la barre de navigation globale
+        const numericId = Number(lessonId);
+        if (!isNaN(numericId)) {
+          this.navService.currentLesson.set(numericId);
+        }
+        this.navService.currentRubrique.set('words-list');
+
+        // Réinitialisation de la pagination et des mots révélés au changement de leçon
+        this.pageSubject.next(1);
+        this.revealed.clear();
+      }),
+      map(lessonId => this.getUnitTag(lessonId))
+    );
+
+    // 4. Remplacement de this.globalService.tag$ par unitTag$
     const allWords$ = combineLatest([
-      this.globalService.tag$,
-      this.globalService.level$,
+      this.unitTag$,
       this.globalService.type$
     ]).pipe(
-      switchMap(([tag, level, type]) => {
-        if (!tag) return of([]);
-        return this.wordService.getAllWords(level, tag, this.globalService.currentCategory, type);
+      switchMap(([unitTag, type]) => {
+        //return this.wordService.getAllWords(unitTag);
+        return this.wordService.getWordsByTag(unitTag);
       })
     );
 
@@ -77,7 +100,6 @@ export class WordListComponent {
   }
 
   getScoreColor(word: SimpleWord): string {
-    
     switch (word.score) {
       case 0 : return `rgb(100,100,100)`;
       case -1 : return `rgb(255,0,0)`;
@@ -86,5 +108,14 @@ export class WordListComponent {
       case 3 : return `rgba(12, 97, 25, 1)`;
       default : return `rgb(255,255,255)`;
     }    
-}
+  }
+
+  getUnitTag(lessonId: number | string): string {
+    const num = Number(lessonId) || 1;
+    // Arrondit au nombre pair supérieur (1->2, 2->2, 3->4, 4->4... 25->26, 26->26)
+    const unitNumber = Math.ceil(num / 2) * 2;
+    
+    // Ajoute un '0' devant si le nombre a moins de 2 chiffres (ex: 2 -> "02")
+    return `Unit ${unitNumber.toString().padStart(2, '0')}`;
+  }
 }

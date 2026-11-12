@@ -1,27 +1,9 @@
 <main class="exercise-page">
-  <nav class="study-tabs" aria-label="Study sections">
-    <a [routerLink]="currentLessonLink">Lesson</a>
-    <a class="active" [routerLink]="['/exercises']" [queryParams]="{unit: currentUnit}">Exercises</a>
-    <a [routerLink]="reviewLink">Review</a>
-  </nav>
-
-  <nav class="unit-navigation" aria-label="Choisir une unité">
-    @for (unit of availableUnits; track unit) {
-      <button
-        type="button"
-        [class.active]="currentUnit === unit"
-        [attr.aria-pressed]="currentUnit === unit"
-        (click)="selectUnit(unit)"
-      >Unit {{ unit }}</button>
-    }
-  </nav>
-
   <header class="page-heading">
     <div>
       <p class="eyebrow">UNIT {{ currentUnit }} · {{ currentUnit === 1 || currentUnit === 3 ? 'GRAMMAR' : 'VOCABULARY' }}</p>
       <h1>Exercices</h1>
     </div>
-    <a class="lesson-link" [routerLink]="currentLessonLink">Lesson</a>
   </header>
 
   @let section = currentSection;

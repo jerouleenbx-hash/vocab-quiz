@@ -32,7 +32,7 @@ interface LessonCategory {
 }
 
 @Component({
-  selector: 'app-unit-two-lesson-page',
+  selector: 'app-one-two-lesson-page',
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './unit-two-lesson-page.html',
@@ -42,6 +42,7 @@ export class UnitTwoLessonPageComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   currentUnit: UnitId = 2;
   readonly availableUnits: UnitId[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
+currentImageIndex: number = 1;
 
   get unitHeading(): string {
     return { 1: 'Present time', 
@@ -571,7 +572,7 @@ export class UnitTwoLessonPageComponent implements OnInit {
   }
 
   private loadUnitWords(unit: UnitId) {
-    this.wordService.getAllWords('All', `Unit 0${unit}`, 'All', 'All')
+    this.wordService.getAllWords(`Unit 0${unit}`, 'All', 'All')
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: words => {

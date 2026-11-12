@@ -17,15 +17,20 @@ export class WordService {
 
   private apiUrl = 'http://localhost:8000/api';
 
+  private readonly jsonUrl = '/words.json'; 
+
   constructor(private http: HttpClient) {}
 
-getAllWords(level: string, tag: string, category = 'All', type = 'All'): Observable<SimpleWord[]> {
+getWordsByTag(targetTag: string): Observable<SimpleWord[]> {
+  return this.http.get<SimpleWord[]>(this.jsonUrl).pipe(
+    map(words => words.filter(word => word.tags === targetTag))
+  );
+}
+
+getAllWords(tag: string, category = 'All', type = 'All'): Observable<SimpleWord[]> {
   return this.http.get<SimpleWord[]>(`${this.apiUrl}/words`, {
     params: {
-      tag: tag,
-      level: level,
-      category,
-      type
+      tag: tag
     }
   });
 }

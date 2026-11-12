@@ -17,9 +17,8 @@ export class QuizService {
 
   constructor(private http: HttpClient) {}
 
-  getQuizDefinition(level: string, tag: string, userId: number, category = 'All', type = 'All'): Observable<MultipleChoiceWord[]> {
+  getQuizDefinition(tag: string, userId: number, category = 'All', type = 'All'): Observable<MultipleChoiceWord[]> {
     let params = new HttpParams()
-      .set('level', level)
       .set('tag', tag)
       .set('category', category)
       .set('type', type)
@@ -28,9 +27,8 @@ export class QuizService {
     return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/quiz/definition`, { params });
   }
 
-  getQuizWord(level: string, tag: string, userId: number, category = 'All', type = 'All'): Observable<MultipleChoiceWord[]> {
+  getQuizWord(tag: string, userId: number, category = 'All', type = 'All'): Observable<MultipleChoiceWord[]> {
     let params = new HttpParams()
-      .set('level', level)
       .set('tag', tag)
       .set('category', category)
       .set('type', type)
