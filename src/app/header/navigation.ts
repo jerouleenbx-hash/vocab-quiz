@@ -16,8 +16,6 @@ export class Navigation {
   rubriques: { path: RubriqueType; label: string }[] = [
     { path: 'lesson', label: 'Lessons' },
     { path: 'exercises', label: 'Exercises' },
-    //{ path: 'quiz-definition', label: 'Quiz : Find definition' },
-    //{ path: 'quiz-word', label: 'Quiz : Find word' },
     { path: 'words-table', label: 'Words table' },
     { path: 'words-list', label: 'Words list' }
   ];

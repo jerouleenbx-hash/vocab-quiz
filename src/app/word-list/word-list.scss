@@ -14,7 +14,7 @@
 .word-list-container h2 {
   margin: 0 0 24px;
   padding: 0 4px 16px;
-  border-bottom: 3px solid #287747;
+  border-bottom: 3px solid #5ca632;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 28px;
   font-weight: 600;
@@ -49,14 +49,14 @@
   transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
 
   &:hover {
-    border-color: #287747;
+    border-color: #5ca632;
     background-color: #f0f5f1;
     transform: translateY(-2px);
   }
 
   &.revealed {
-    border-color: #287747;
-    border-left: 4px solid #287747;
+    border-color: #5ca632;
+    border-left: 4px solid #5ca632;
     background-color: #f5f7f5;
   }
 }
@@ -103,7 +103,7 @@
   margin: 0 0 6px;
 
   strong {
-    color: #287747;
+    color: #5ca632;
     font-weight: 650;
   }
 }

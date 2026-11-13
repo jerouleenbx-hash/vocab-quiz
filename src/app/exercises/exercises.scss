@@ -15,12 +15,12 @@
   align-items: end;
   gap: 20px;
   padding: 0 4px 22px;
-  border-bottom: 3px solid #287747;
+  border-bottom: 3px solid #5ca632;
 }
 
 .eyebrow {
   margin: 0 0 5px;
-  color: #287747;
+  color: #5ca632;
   font-size: 12px;
   font-weight: 700;
 }
@@ -76,9 +76,9 @@
 
 
 .unit-navigation button.active {
-  background: #287747;
+  background: #5ca632;
   color: #fff;
-  border-color: #287747;    /* Aligne la bordure avec la couleur active */
+  border-color: #5ca632;    /* Aligne la bordure avec la couleur active */
 }
 
 
@@ -87,7 +87,7 @@
 }
 
 .unit-navigation button.active {
-  background: #287747;
+  background: #5ca632;
   color: #fff;
 }
 
@@ -111,9 +111,9 @@
 .navigation-arrow {
   width: 40px;
   height: 40px;
-  border: 1px solid #287747;
+  border: 1px solid #5ca632;
   border-radius: 4px;
-  background: #287747;
+  background: #5ca632;
   color: #fff;
   font-size: 22px;
   line-height: 1;
@@ -152,7 +152,7 @@
   flex: 0 0 34px;
   place-items: center;
   border-radius: 4px;
-  background: #287747;
+  background: #5ca632;
   color: white;
   font-size: 18px;
   font-weight: 700;
@@ -195,14 +195,14 @@
 }
 
 .action-button.primary {
-  border: 1px solid #287747;
+  border: 1px solid #5ca632;
 }
 
 .lesson-link,
 .action-button.primary {
-  border: 1px solid #287747;
+  border: 1px solid #5ca632;
   border-radius: 4px;
-  background: #287747;
+  background: #5ca632;
   color: white;
 }
 
@@ -211,7 +211,7 @@
 }
 
 .score {
-  color: #287747;
+  color: #5ca632;
   font-size: 14px;
   font-weight: 700;
 }
@@ -221,7 +221,7 @@
   flex-wrap: wrap;
   gap: 7px 14px;
   margin: 0 0 14px 45px;
-  color: #287747;
+  color: #5ca632;
   font-size: 14px;
   font-weight: 650;
 }
@@ -280,12 +280,12 @@
 }
 
 .answer-input:focus {
-  border-bottom: 2px solid #287747;
+  border-bottom: 2px solid #5ca632;
   background: #eef5ef;
 }
 
 .answer-input.correct {
-  border-bottom-color: #287747;
+  border-bottom-color: #5ca632;
   background: #e9f4eb;
 }
 
@@ -297,7 +297,7 @@
 .correction {
   display: inline-block;
   margin: 0 4px;
-  color: #287747;
+  color: #5ca632;
   font-size: 13px;
   font-weight: 700;
 }

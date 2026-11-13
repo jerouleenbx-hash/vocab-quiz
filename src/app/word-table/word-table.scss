@@ -19,7 +19,7 @@
 .word-table-container h2 {
   margin: 0 0 24px;
   padding: 0 4px 16px;
-  border-bottom: 3px solid #287747;
+  border-bottom: 3px solid #5ca632;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 28px;
   font-weight: 600;
@@ -35,12 +35,12 @@
   background-color: #ffffff;
 }
 
-/* En-tête du tableau (vert principal #287747 comme .section-letter et .action-button.primary) */
+/* En-tête du tableau (vert principal #5ca632 comme .section-letter et .action-button.primary) */
 .word-table th {
   position: sticky;
   top: 0;
   z-index: 2;
-  background-color: #287747;
+  background-color: #5ca632;
   color: #ffffff;
   padding: 12px 14px;
   text-align: left;
@@ -146,7 +146,7 @@
 
 .pagination button:hover:not(:disabled) {
   background-color: #f0f5f1;
-  border-color: #287747;
+  border-color: #5ca632;
 }
 
 .pagination button:disabled {
@@ -159,7 +159,7 @@
 .pagination span {
   font-size: 14px;
   font-weight: 650;
-  color: #287747;
+  color: #5ca632;
 }
 
 @media (max-width: 700px) {
