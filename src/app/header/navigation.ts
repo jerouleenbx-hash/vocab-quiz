@@ -18,8 +18,8 @@ export class Navigation {
     { path: 'exercises', label: 'Exercises' },
     //{ path: 'quiz-definition', label: 'Quiz : Find definition' },
     //{ path: 'quiz-word', label: 'Quiz : Find word' },
-    { path: 'words-list', label: 'Words list' },
-    { path: 'words-table', label: 'Words table' }
+    { path: 'words-table', label: 'Words table' },
+    { path: 'words-list', label: 'Words list' }
   ];
 
   navService = inject(NavigationService);
