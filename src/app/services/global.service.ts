@@ -4,8 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class GlobalService {
 
-  private _tag$ = new BehaviorSubject<string>('Basic words');
-  private _category$ = new BehaviorSubject<string>('BASIC WORDS');
+  private _tag$ = new BehaviorSubject<string>('Unit 02');
+  private _category$ = new BehaviorSubject<string>('All');
   private _type$ = new BehaviorSubject<string>('All');
 
   // ✅ Getter pour récupérer l'observable

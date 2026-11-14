@@ -4,33 +4,12 @@
     <!-- Définition -->
     <p class="word"><strong>{{ q.definition }} </strong></p>
 
-    <!-- Champ texte -->
-    <div class="text-answer input-container">
-      <input
-        #answerInput
-        type="text"
-        [value]="userAnswer() ?? ''"
-        placeholder="Your answer..."
-        (input)="userAnswer.set($any($event.target).value)"
-        (keyup.enter)="validateTypedAnswer()"
-      />
 
-      <button type="button" (click)="validateTypedAnswer()">
-        Validate
-      </button>
-    </div>
 
-    <!-- Hint -->
-    <div class="example">
-      @if (!showHint()) {
-        <button type="button" (click)="showHint.set(true)">
-          Hint
-        </button>
-      }
-    </div>
+
 
     <!-- Choix multiples (affichés uniquement après clic sur Hint) -->
-    @if (showHint()) {
+    
       <div class="choices">
         @for (choice of q.choices; track choice) {
           <button
@@ -47,7 +26,6 @@
           </button>
         }
       </div>
-    }
 
     <!-- Feedback après réponse -->
 <p class="feedback" [class.correct]="isCorrect()" [class.incorrect]="isCorrect() === false">
@@ -105,6 +83,12 @@
       }
     </tbody>
   </table>
+  <div class="restart-container">
+  <button type="button" class="restart-btn" (click)="restartQuiz()">
+    Restart
+  </button>
+</div>
+
 </div>
 </div>
 

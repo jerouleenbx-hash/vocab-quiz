@@ -572,7 +572,7 @@ currentImageIndex: number = 1;
   }
 
   private loadUnitWords(unit: UnitId) {
-    this.wordService.getAllWords(`Unit 0${unit}`, 'All', 'All')
+    this.wordService.getAllWords(`Unit 0${unit}`)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: words => {

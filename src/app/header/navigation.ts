@@ -17,7 +17,9 @@ export class Navigation {
     { path: 'lesson', label: 'Lessons' },
     { path: 'exercises', label: 'Exercises' },
     { path: 'words-table', label: 'Words table' },
-    { path: 'words-list', label: 'Words list' }
+    { path: 'words-list', label: 'Words list' },
+    { path: 'quiz-word', label: 'Quiz Words' },
+    { path: 'quiz-definition', label: 'Quiz Definitions' }
   ];
 
   navService = inject(NavigationService);

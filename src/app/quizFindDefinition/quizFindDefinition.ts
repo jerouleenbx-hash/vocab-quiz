@@ -8,11 +8,11 @@ import { NavigationService } from '../services/navigation.service';
 type QuizResult = {
   questionId: number;
   word: string;
-  difficulty: string;
   userAnswer: string | null;
   correctAnswer: string;
   correct: boolean;
 };
+
 
 @Component({
   selector: 'app-quiz',
@@ -69,8 +69,7 @@ export class QuizFindDefinition implements OnInit {
 
   loadQuestions() {
     this.quizService.getQuizDefinition(
-      this.tag,
-      this.userId
+      this.tag
     ).subscribe({
       next: (qs) => {
         this.questions.set(qs);
@@ -113,14 +112,11 @@ export class QuizFindDefinition implements OnInit {
       {
         questionId: q.id,
         word: q.word,
-        difficulty: q.difficulty,
         userAnswer: choice,
         correctAnswer: q.definition,
         correct
       }
     ]);
-
-    this.quizService.sendAnswer(q.id, correct ? this.showHint() ? 1 : 2 : -1).subscribe();
 
     const delay = correct ? 1000 : 2000;
 

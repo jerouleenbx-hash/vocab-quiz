@@ -99,17 +99,6 @@ export class WordListComponent {
     return this.revealed.has(word.id);
   }
 
-  getScoreColor(word: SimpleWord): string {
-    switch (word.score) {
-      case 0 : return `rgb(100,100,100)`;
-      case -1 : return `rgb(255,0,0)`;
-      case 1 : return `rgba(214, 226, 50, 1)`;
-      case 2 : return `rgba(21, 21, 161, 1)`;
-      case 3 : return `rgba(12, 97, 25, 1)`;
-      default : return `rgb(255,255,255)`;
-    }    
-  }
-
   getUnitTag(lessonId: number | string): string {
     const num = Number(lessonId) || 1;
     // Arrondit au nombre pair supérieur (1->2, 2->2, 3->4, 4->4... 25->26, 26->26)

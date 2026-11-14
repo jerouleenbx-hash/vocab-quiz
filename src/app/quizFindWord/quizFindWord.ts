@@ -8,7 +8,6 @@ import { NavigationService } from '../services/navigation.service';
 type QuizResult = {
   questionId: number;
   definition: string;
-  difficulty: string;
   word: string;              // bonne réponse
   userAnswer: string | null; // réponse tapée / choisie
   correct: boolean;
@@ -27,7 +26,8 @@ export class QuizFindWord implements OnInit, AfterViewInit {
   selectedAnswer = signal<string | null>(null);
   userAnswer = signal<string | null>(null);
   score = signal(0);
-  showHint = signal(false);
+  lessonId: string = '1';
+  showHint = signal(true);
   correctAnswerToShow = signal<string | null>(null);
   results = signal<QuizResult[]>([]);
   totalQuestions = 8;
@@ -78,15 +78,15 @@ export class QuizFindWord implements OnInit, AfterViewInit {
     const start = performance.now();
     console.log('Request quiz word start', start);
 
+    console.log(this.tag);
+
     this.quizService.getQuizWord(
-      this.tag,
-      this.userId,
-      this.globalService.currentCategory,
-      this.globalService.currentType
+      this.tag
     ).subscribe({
       next: (qs) => {
         console.log('Request success after (ms):', performance.now() - start, 'count:', qs.length);
-        this.questions.set(qs);
+                console.log('Questions récupérées :', qs);
+        this.questions.set(qs);        
         this.currentIndex.set(0);
         this.loadCurrentQuestion();
         setTimeout(() => this.focusInput(), 0);
@@ -127,14 +127,11 @@ export class QuizFindWord implements OnInit, AfterViewInit {
       {
         questionId: q.id,
         definition: q.definition,
-        difficulty: q.difficulty,
         word: q.word,
         userAnswer: choice,
         correct
       }
     ]);
-
-    this.quizService.sendAnswer(q.id, correct ? 1 : -1).subscribe();
 
     const delay = correct ? 1000 : 2000;
 
@@ -166,14 +163,12 @@ export class QuizFindWord implements OnInit, AfterViewInit {
       {
         questionId: q.id,
         definition: q.definition,
-        difficulty: q.difficulty,
         word: q.word,
         userAnswer: choice,
         correct
       }
     ]);
 
-    this.quizService.sendAnswer(q.id, correct ? 2 : -1).subscribe();
 
     const delay = correct ? 1000 : 3000;
 

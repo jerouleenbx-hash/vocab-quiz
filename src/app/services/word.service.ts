@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { SimpleWord, MultipleChoiceWord } from '../models/interfaces'
-
+import { SimpleWord } from '../models/interfaces';
 
 export interface WordProgress {
   id: number;
@@ -14,79 +13,48 @@ export interface WordProgress {
 
 @Injectable({ providedIn: 'root' })
 export class WordService {
-
-  private apiUrl = 'http://localhost:8000/api';
-
-  private readonly jsonUrl = '/words.json'; 
+  private readonly jsonUrl = '/words.json';
 
   constructor(private http: HttpClient) {}
 
-getWordsByTag(targetTag: string): Observable<SimpleWord[]> {
-  return this.http.get<SimpleWord[]>(this.jsonUrl).pipe(
-    map(words => words.filter(word => word.tags === targetTag))
-  );
-}
+  getWordsByTag(targetTag: string): Observable<SimpleWord[]> {
+    return this.http.get<SimpleWord[]>(this.jsonUrl).pipe(
+      map(words => words.filter(word => word.tags === targetTag))
+    );
+  }
 
-getAllWords(tag: string, category = 'All', type = 'All'): Observable<SimpleWord[]> {
-  return this.http.get<SimpleWord[]>(`${this.apiUrl}/words`, {
-    params: {
-      tag: tag
-    }
-  });
-}
+  getAllWords(tag: string): Observable<SimpleWord[]> {
+    return this.http.get<SimpleWord[]>(this.jsonUrl).pipe(
+      map(words => words.filter(word => word.tags === tag))
+    );
+  }
 
-getAllTags(category?: string): Observable<string[]> {
-  return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
-    map(words => {
-      // Filtrer par catégorie si spécifiée
-      const filteredWords = category
-        ? words.filter(w => category === 'All' || w.category?.split(',').some(value => value.trim() === category))
-        : words;
+  getAllTags(): Observable<string[]> {
+    return this.http.get<SimpleWord[]>(this.jsonUrl).pipe(
+      map(words => {
+        const tags = words
+          .map(w => w.tags)
+          .filter((tag): tag is string => !!tag && tag.trim().length > 0)
+          .flatMap(tag => tag.split(','))
+          .map(tag => tag.trim());
 
-      // Extraire tous les tags non vides
-      const tags = filteredWords
-        .map(w => w.tags)
-        .filter(tag => tag && tag.trim())
-        .flatMap(tag => tag ? tag.split(',') : [])
-        .map(tag => tag.trim());
+        return Array.from(new Set(tags));
+      })
+    );
+  }
 
-      // Supprimer les doublons
-      return Array.from(new Set(tags));
-    })
-  );
-}
-
-
-getAllCategories(): Observable<string[]> {
-  return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
-    map(words => {
-      // Extraire tous les categories non vides
-      const categories = words
-        .map(w => w.category)                   // récupérer tags
-        .filter(category => category && category.trim())   // ignorer null, undefined ou chaîne vide
-        .flatMap(category => category ? category.split(',') : [])        
-        .map(category => category.trim());            // enlever les espaces superflus
-
-      // Supprimer les doublons
-      return Array.from(new Set(categories));
-    })
-  );
-}
-
-getAllTypes(): Observable<string[]> {
-  return this.http.get<MultipleChoiceWord[]>(`${this.apiUrl}/words`).pipe(
-    map(words => Array.from(new Set(
-      words
-        .map(word => word.type)
-        .filter(type => type && type.trim())
-        .map(type => type.trim())
-    )))
-  );
-}
-
-importWords(file: File) {
-    const formData = new FormData();
-    formData.append('file', file);
-    return this.http.post(`${this.apiUrl}/import`, formData);
-}
+  getAllTypes(): Observable<string[]> {
+    return this.http.get<SimpleWord[]>(this.jsonUrl).pipe(
+      map(words =>
+        Array.from(
+          new Set(
+            words
+              .map(word => word.type)
+              .filter((type): type is string => !!type && type.trim().length > 0)
+              .map(type => type.trim())
+          )
+        )
+      )
+    );
+  }
 }

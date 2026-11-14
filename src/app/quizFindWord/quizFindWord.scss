@@ -7,7 +7,7 @@
 
 /* Container général */
 .quiz-container {
-  max-width: 640px;
+  max-width: 1240px;
   margin: 28px auto 64px;
   padding: 24px;
   border: 1px solid #9da99f;
@@ -18,13 +18,13 @@
 /* Mot à deviner */
 .word {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 600;
   color: #242a25;
   text-align: center;
   margin: 0 0 18px;
   padding-bottom: 14px;
-  border-bottom: 3px solid #287747;
+  border-bottom: 3px solid #5ca632;
 }
 
 /* Exemple / indice */
@@ -49,7 +49,7 @@
 
 .example button:hover {
   background-color: #f0f5f1;
-  border-color: #287747;
+  border-color: #5ca632;
 }
 
 .example p.hint {
@@ -59,7 +59,7 @@
   padding: 10px 14px;
   background-color: #f5f7f5;
   border: 1px solid #d5ddd6;
-  border-left: 4px solid #287747;
+  border-left: 4px solid #5ca632;
   border-radius: 4px;
   font-size: 14px;
 }
@@ -88,14 +88,14 @@
 
 .choices button:hover:not(:disabled) {
   background-color: #f0f5f1;
-  border-color: #287747;
+  border-color: #5ca632;
 }
 
 /* États boutons */
 button.correct {
   background-color: #e9f4eb !important;
-  color: #287747 !important;
-  border-color: #287747 !important;
+  color: #5ca632 !important;
+  border-color: #5ca632 !important;
   font-weight: 650;
 }
 
@@ -119,7 +119,7 @@ button.selected {
 }
 
 .feedback.correct {
-  color: #287747;
+  color: #5ca632;
 }
 
 .feedback.incorrect {
@@ -138,7 +138,7 @@ button.selected {
 
 .progress-bar .progress {
   height: 100%;
-  background-color: #287747;
+  background-color: #5ca632;
   transition: width 0.3s ease;
 }
 
@@ -160,8 +160,8 @@ button.selected {
   min-height: 38px;
   padding: 0 16px;
   border-radius: 4px;
-  border: 1px solid #287747;
-  background-color: #287747;
+  border: 1px solid #5ca632;
+  background-color: #5ca632;
   color: #ffffff;
   font: inherit;
   font-size: 14px;
@@ -196,7 +196,7 @@ button.selected {
 
 /* En-tête */
 .results-table th {
-  background-color: #287747;
+  background-color: #5ca632;
   color: #ffffff;
   padding: 12px 14px;
   text-align: left;
@@ -247,7 +247,7 @@ button.selected {
 
 .result-cell.correct {
   background-color: #e9f4eb !important;
-  color: #287747;
+  color: #5ca632;
 }
 
 .result-cell.incorrect {
@@ -271,4 +271,27 @@ button.selected {
   .word {
     font-size: 24px;
   }
+}
+
+
+/* Conteneur du bouton Restart */
+.restart-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem; /* Augmentez cette valeur (ex: 2.5rem ou 3rem) pour le descendre davantage */
+}
+
+.restart-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restart-btn:hover {
+  background-color: #0056b3;
 }
