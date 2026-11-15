@@ -20,7 +20,7 @@ export class WordListComponent {
   private pageSubject = new BehaviorSubject<number>(1);
   page$ = this.pageSubject.asObservable();
 
-  pageSize = 1500;
+  pageSize = 12;
 
   words$: Observable<SimpleWord[]>;
   totalPages$: Observable<number>;
