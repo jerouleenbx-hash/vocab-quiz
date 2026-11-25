@@ -19,15 +19,12 @@
       (click)="nextImage()">→</button>
   </nav>
 
-  <!-- Affichage de l'image active uniquement -->
-  <div class="html-wrapper">
-    <iframe 
-      [src]="currentLessonUrl" 
-      style="width: 100%; height: 2000px; border: none; display: block;"
-      [title]="'Page ' + (currentIndex + 1)">
-    </iframe>
-  </div>
-  
-
-  </div>
-</main>
+<div class="lesson-content">
+  <iframe 
+    #lessonFrame
+    [src]="currentLessonUrl"
+    (load)="onIframeLoad()"
+    scrolling="no"
+    style="width: 100%; border: none; overflow: hidden; display: block;">
+  </iframe>
+</div>
