@@ -1,2 +1,16 @@
-<app-navigation />
-<router-outlet /><router-outlet />
+<div class="app-grid">
+  <!-- 1. En haut : le composant navigation (uniquement pour les leçons) -->
+  <header class="header-lessons">
+    <app-navigation mode="lessons"></app-navigation>
+  </header>
+
+  <!-- 2. À gauche : le composant navigation (uniquement pour les rubriques) -->
+  <aside class="sidebar-rubriques">
+    <app-navigation-side mode="rubriques"></app-navigation-side>
+  </aside>
+
+  <!-- 3. Au centre/droite : le contenu de vos pages -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

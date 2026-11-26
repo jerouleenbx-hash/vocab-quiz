@@ -2,13 +2,13 @@ import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Navigation } from '../header/navigation';
+import { Navigation } from '../navigation/navigation';
 import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-lesson',
   templateUrl: './lesson-page.html',
-  styleUrls: ['../exercises/exercises.scss'],
+  styleUrls: ['../app.scss'],
   standalone: true,
   imports: [CommonModule, Navigation]
 })

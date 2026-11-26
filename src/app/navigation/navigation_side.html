@@ -1,0 +1,10 @@
+<nav class="rubriques">
+  @for (rubrique of rubriques; track rubrique.path) {
+    <button 
+      type="button"
+      (click)="navService.setRubrique(rubrique.path)"
+      [class.active]="navService.currentRubrique() === rubrique.path">
+      {{ rubrique.label }}
+    </button>
+  }
+</nav>

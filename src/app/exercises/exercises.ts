@@ -51,7 +51,7 @@ export interface ExerciseSection {
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './exercises.html',
-  styleUrls: ['./exercises.scss']
+  styleUrls: ['./../app.scss']
 })
 export class ExercisesComponent {
   currentUnit: UnitId = 1;

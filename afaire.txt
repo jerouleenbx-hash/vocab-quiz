@@ -1,0 +1,48 @@
+Menu principal :
+- Mettre les flèches tout en haut pour naviguer ou bien 
+- Mettre les menus sous les numéros ?
+- Titre en haut ?
+
+Lessons :
+- Flèches à droite et à gauche, quitte à réduire un poil la largeur de la fenêtre
+
+Exercices :
+- 2F : voir comment faire
+- 2J : il manque du texte
+- 2K : il manque la premiere phrase
+- 3 et 4 : à revoir complètement
+
+Prompt pour les lessons vocab (uniquement page 1) : 
+à partir du html et du json, complete chaque mot avec sa definition et un exemple, toujours sous forme de tableau et avec le meme style que le html
+et donner le json + html (copier/coller)
+
+
+
+- Vérifier exercices 1 à 4 + 19 à 26
+- 18 L : il manque la première phrase
+- Reviews
+- Faire un nouveau type d'exercice pour relier les expressions ou mots avec une définition
+
+Build executables :
+- linux :
+npx tauri build
+- windows :
+npx tauri build --runner cargo-xwin --target x86_64-pc-windows-msvc --bundles nsis
+- android :
+cd ~/Travail/Anglais/angular
+
+# 1. Supprimer l'ancien APK signé pour éviter toute confusion
+rm -f ~/vocab-quiz-signed.apk
+
+# 2. Recompiler Angular puis l'APK Tauri
+npm run build
+npx tauri android build --apk --target aarch64
+
+# 3. Signer le nouvel APK généré
+~/Android/Sdk/build-tools/$(ls ~/Android/Sdk/build-tools | tail -n 1)/apksigner sign \
+  --ks ~/my-release-key.jks \
+  --out ~/vocab-quiz-signed.apk \
+  src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release-unsigned.apk
+
+
+Possibilité de couper en deux pour avoir leçon et exercices ?

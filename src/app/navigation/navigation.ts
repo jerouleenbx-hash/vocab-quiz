@@ -1,0 +1,24 @@
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { NavigationService, RubriqueType } from '../services/navigation.service';
+
+@Component({
+  selector: 'app-navigation',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './navigation.html',
+  styleUrls: ['../app.scss']
+})
+export class Navigation {
+  lessons: number[] = Array.from({ length: 26 }, (_, i) => i + 1);
+  
+  rubriques: { path: RubriqueType; label: string }[] = [
+    { path: 'lesson', label: 'Lessons' },
+    { path: 'exercises', label: 'Exercises' },
+    { path: 'quiz-word', label: 'Quiz Words' },
+    { path: 'quiz-definition', label: 'Quiz Definitions' }
+  ];
+
+  navService = inject(NavigationService);
+}

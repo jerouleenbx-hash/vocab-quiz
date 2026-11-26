@@ -4,20 +4,17 @@ import { RouterModule } from '@angular/router';
 import { NavigationService, RubriqueType } from '../services/navigation.service';
 
 @Component({
-  selector: 'app-navigation',
+  selector: 'app-navigation-side',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './navigation.html',
-  styleUrls: ['../exercises/exercises.scss']
+  templateUrl: './navigation_side.html',
+  styleUrls: ['../app.scss']
 })
-export class Navigation {
-  lessons: number[] = Array.from({ length: 26 }, (_, i) => i + 1);
+export class Navigation_Side {
   
   rubriques: { path: RubriqueType; label: string }[] = [
     { path: 'lesson', label: 'Lessons' },
     { path: 'exercises', label: 'Exercises' },
-    { path: 'words-table', label: 'Words table' },
-    { path: 'words-list', label: 'Words list' },
     { path: 'quiz-word', label: 'Quiz Words' },
     { path: 'quiz-definition', label: 'Quiz Definitions' }
   ];
