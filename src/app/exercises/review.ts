@@ -70,28 +70,23 @@ readonly availableProgressTests: ReviewId[] = Array.of<ReviewId>(14, 15);
     private route: ActivatedRoute,
     private navService: NavigationService
   ) {
-    combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(([params, queryParams]) => {
-      const reviewParam = params.get('reviewNumber') ?? params.get('lessonId');
-      const requestedSection = queryParams.get('section') as SectionId | null;
+    // Dans le constructor de ReviewComponent :
+combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(([params, queryParams]) => {
+  const reviewParam = params.get('reviewNumber') ?? params.get('lessonId');
+  const requestedSection = queryParams.get('section') as SectionId | null;
 
-      const numericReview = Number(reviewParam);
-      if (!isNaN(numericReview) && numericReview >= 1 && numericReview <= 15) {
-        this.currentReview = numericReview as ReviewId;
-      } else {
-        this.currentReview = 1;
-      }
+  const numericReview = Number(reviewParam);
+  this.currentReview = (!isNaN(numericReview) && numericReview >= 1 && numericReview <= 15)
+    ? (numericReview as ReviewId)
+    : 1;
 
-      // Synchronisation avec la navigation globale si le service gère les reviews
-      /*if (this.currentReview <= 13) {
-        this.navService.currentLesson.set(this.unitStart);
-      }
-      */
-
-      const sectionIndex = requestedSection
-        ? this.sections.findIndex(section => section.id === requestedSection)
-        : 0;
-      this.currentSectionIndex = sectionIndex >= 0 ? sectionIndex : 0;
+  if (requestedSection) {
+    setTimeout(() => {
+      document.getElementById(`section-${requestedSection}`)?.scrollIntoView({ behavior: 'smooth' });
     });
+  }
+});
+
   }
 
   get reviewNumber(): ReviewId {
@@ -136,12 +131,11 @@ readonly availableProgressTests: ReviewId[] = Array.of<ReviewId>(14, 15);
     return ['/exercises', String(this.unitStart)];
   }
 
-  selectReview(reviewId: ReviewId) {
-    if (this.currentReview === reviewId) return;
-    this.currentReview = reviewId;
-    this.currentSectionIndex = 0;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+selectReview(reviewId: ReviewId) {
+  if (this.currentReview === reviewId) return;
+  this.currentReview = reviewId;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
   sectionStateKey(section: ExerciseSection): string {
     return `review-${this.currentReview}-${section.id}`;

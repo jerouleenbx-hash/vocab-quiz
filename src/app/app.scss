@@ -414,3 +414,24 @@ app-navigation-side {
     width: 11ch;
   }
 }
+
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Aligne les boutons tout en haut, sur la première ligne */
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.section-actions {
+  display: flex;
+  flex-wrap: nowrap; /* Empêche les boutons de passer sur deux lignes */
+  flex-shrink: 0;    /* Empêche le texte long de comprimer la zone des boutons */
+  align-items: center;
+  gap: 8px;
+}
+
+.action-button {
+  white-space: nowrap; /* Empêche le texte "Show the correction" de se couper */
+}

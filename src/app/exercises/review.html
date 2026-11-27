@@ -1,136 +1,66 @@
-<section class="exercises-page review-page">
-  <header class="exercises-header">
-    <div>
-      <p class="eyebrow">{{ isProgressTest ? 'Progress Test' : 'Review ' + reviewNumber }}</p>
-      <h1>{{ reviewTitle }}</h1>
-    </div>
+<div class="exercise-page">
+  <!-- En-tête principal -->
+<header class="page-heading">
+  <span>{{ isProgressTest ? reviewTitle : 'Review ' + reviewNumber }}</span>
+</header>
 
-    <div class="header-links">
-      <a [routerLink]="lessonLink" class="nav-pill">← Leçon Unit {{ unitStart }}</a>
-      <a [routerLink]="exerciseLink" class="nav-pill">Exercices Unit {{ unitStart }}</a>
-    </div>
-  </header>
 
-  <!-- Sélecteur rapide des Reviews (1 à 13) et Progress Tests (1 & 2) -->
-  <nav class="review-selector" aria-label="Navigation des révisions">
-    <div class="selector-group">
-      <span class="selector-label">Reviews :</span>
-      @for (rev of availableReviews; track rev) {
-        <a
-          [routerLink]="['/review', rev]"
-          class="unit-chip"
-          [class.active]="currentReview === rev"
-        >
-          {{ rev }}
-        </a>
-      }
-    </div>
-
-    <div class="selector-group">
-      <span class="selector-label">Progress Tests :</span>
-      <a
-        [routerLink]="['/review', 14]"
-        class="unit-chip"
-        [class.active]="currentReview === 14"
-      >
-        Test 1 (1–12)
-      </a>
-      <a
-        [routerLink]="['/review', 15]"
-        class="unit-chip"
-        [class.active]="currentReview === 15"
-      >
-        Test 2 (13–26)
-      </a>
-    </div>
-  </nav>
-
-  @let section = currentSection;
-
-  <!-- Navigation entre les exercices (A, B, C, D, E...) -->
-  <div class="section-pagination">
-    <button
-      type="button"
-      (click)="previousExercise()"
-      [disabled]="currentSectionIndex === 0"
-    >
-      ←
-    </button>
-
-    <span>
-      Exercice {{ section?.id }} · {{ currentSectionIndex + 1 }} / {{ sections.length }}
-    </span>
-
-    <button
-      type="button"
-      (click)="nextExercise()"
-      [disabled]="currentSectionIndex === sections.length - 1"
-    >
-      →
-    </button>
-  </div>
-
-  @if (section) {
-    <article class="exercise-card">
-      <div class="exercise-card-header">
-        <span class="section-badge">{{ section.id }}</span>
-        <div>
-          <h2>{{ section.title }}</h2>
-          <p class="instruction">{{ section.instruction }}</p>
+  <!-- Toutes les sections affichées les unes à la suite des autres -->
+  @for (section of sections; track section.id) {
+    <section class="exercise-section review-block" [id]="'section-' + section.id">
+      <div class="section-heading">
+        <div class="section-title">
+          <span class="section-letter">{{ section.id }}</span>
+          <div>
+            <h2>{{ section.title }}</h2>
+            <p>{{ section.instruction }}</p>
+          </div>
         </div>
 
-        <div class="exercise-actions">
+        <div class="section-actions">
           @if (checkedSections[sectionStateKey(section)]) {
-            <span class="score-badge">
+            <span class="score">
               {{ sectionScore(section) }} / {{ sectionGapCount(section) }}
             </span>
           }
-
           <button
             type="button"
-            class="btn-verify"
-            (click)="checkedSections[sectionStateKey(section)] = true"
-          >
+            class="action-button primary"
+            (click)="checkedSections[sectionStateKey(section)] = true">
             Verify
           </button>
-
           <button
             type="button"
-            class="btn-correction"
-            (click)="toggleCorrection(section)"
-          >
+            class="action-button"
+            (click)="toggleCorrection(section)">
             {{ visibleCorrections[sectionStateKey(section)] ? 'Hide the correction' : 'Show the correction' }}
           </button>
         </div>
       </div>
 
-      <!-- Boîte de mots (Word Box) si présente -->
       @if (section.wordBox) {
-        <div class="word-box">
+        <div class="word-bank">
           @for (word of section.wordBox; track word) {
-            <span class="word-chip">{{ word }}</span>
+            <span>{{ word }}</span>
           }
         </div>
       }
 
-      <!-- Liste des questions -->
-      <ol class="questions-list">
+      <ol class="question-list">
         @for (question of section.questions; track question.number) {
-          <li class="question-item">
+          <li class="question-row">
             <span class="question-number">{{ question.number }}</span>
-
-            <div class="question-content">
+            <p class="question-text">
               @for (part of question.parts; track $index; let gapIndex = $index) {
-                <span class="text-part">{{ part }}</span>
-
+                <span>{{ part }}</span>
                 @if (gapIndex < question.answers.length) {
                   @if (answerOptions(question, gapIndex).length) {
                     <select
-                      [ngModel]="userAnswers[answerKey(section, question.number, gapIndex)] ?? ''"
-                      (ngModelChange)="setAnswer(section, question.number, gapIndex, $event)"
+                      class="answer-input answer-select"
                       [class.correct]="checkedSections[sectionStateKey(section)] && isCorrect(section, question, gapIndex)"
                       [class.incorrect]="checkedSections[sectionStateKey(section)] && !isCorrect(section, question, gapIndex)"
-                    >
+                      [ngModel]="userAnswers[answerKey(section, question.number, gapIndex)] || ''"
+                      (ngModelChange)="setAnswer(section, question.number, gapIndex, $event)">
                       <option value="">Choose...</option>
                       @for (option of answerOptions(question, gapIndex); track option) {
                         <option [value]="option">{{ option }}</option>
@@ -139,26 +69,24 @@
                   } @else {
                     <input
                       type="text"
-                      [value]="userAnswers[answerKey(section, question.number, gapIndex)] ?? ''"
-                      (input)="updateAnswer(section, question.number, gapIndex, $event)"
+                      class="answer-input"
                       [class.correct]="checkedSections[sectionStateKey(section)] && isCorrect(section, question, gapIndex)"
                       [class.incorrect]="checkedSections[sectionStateKey(section)] && !isCorrect(section, question, gapIndex)"
-                      autocomplete="off"
-                      spellcheck="false"
-                    />
+                      [value]="userAnswers[answerKey(section, question.number, gapIndex)] || ''"
+                      (input)="updateAnswer(section, question.number, gapIndex, $event)" />
                   }
 
                   @if (visibleCorrections[sectionStateKey(section)]) {
-                    <span class="correction-hint">
+                    <span class="correction">
                       {{ acceptedAnswers(question, gapIndex).join(' / ') }}
                     </span>
                   }
                 }
               }
-            </div>
+            </p>
           </li>
         }
       </ol>
-    </article>
+    </section>
   }
-</section>
+</div>
