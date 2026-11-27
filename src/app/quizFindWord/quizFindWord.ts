@@ -193,7 +193,7 @@ export class QuizFindWord implements OnInit, AfterViewInit {
   }
 
   progress(): number {
-    return Math.round(((this.currentIndex() - 1) / this.totalQuestions) * 100);
+    return Math.round(((this.currentIndex()) / this.totalQuestions) * 100);
   }
 
   restartQuiz() {

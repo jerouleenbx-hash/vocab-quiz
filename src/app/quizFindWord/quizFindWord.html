@@ -1,5 +1,10 @@
 @if (currentQuestion(); as q) {
   <div class="quiz-container">
+    <nav class="exercise-navigation" aria-label="Navigation entre les exercices">
+      <a></a>
+      <span>Quiz words</span>
+      <a></a>
+    </nav>
 
     <!-- Définition -->
     <p class="word"><strong>{{ q.definition }} </strong></p>
@@ -43,6 +48,8 @@
     <div class="progress-bar">
       <div class="progress" [style.width.%]="progress()"></div>
     </div>
+
+
 
   </div>
 }

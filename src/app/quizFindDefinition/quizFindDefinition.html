@@ -1,6 +1,12 @@
 @if (currentQuestion(); as q) {
 
   <div class="quiz-container">
+    <nav class="exercise-navigation" aria-label="Navigation entre les exercices">
+      <a></a>
+      <span>Quiz definitions</span>
+      <a></a>
+    </nav>
+
     <!-- Mot à deviner -->
     <p class="word"><strong>{{ q.word  }}</strong></p>
 
@@ -47,6 +53,7 @@
     <div class="progress-bar">
       <div class="progress" [style.width.%]="progress()"></div>
     </div>
+
   </div>
 }
 @else {
@@ -75,7 +82,7 @@
                 [class.incorrect]="!r.correct"
               >
             <div class="sub">{{ r.userAnswer ?? '—' }} {{ r.correct ? (' ✅') : (' ❌') }}</div>
-                {{ r.userAnswer ?? '—' }}
+                
               </td>
 
               <td class="good-answer">
